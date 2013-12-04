@@ -47,3 +47,4 @@ end
 gem 'devise'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
+gem 'libxml-ruby'
