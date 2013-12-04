@@ -8,9 +8,59 @@
   <!--part of devise setup-->
   <!-- <p class="notice"><%= notice %></p> -->
   <p class="alert"><%= alert %></p>
+
+<style type="text/css"> 
+body                                                                   /* site bg color    */
+     {
+     margin: 0; 
+     /*background-color:#b0c4de*/
+     }
+ #navbar {
+    display: table;
+    width: 100%;
+ }
+
+ #navbar ul { 
+    margin: 0; 
+    padding: 5px; 
+    cellspacing: 0;
+    cellpadding: 0;
+    border: 0;
+    list-style-type: none; 
+    background-color: #cc0000; 
+  } 
+
+#navbar ul li {  
+    display: table-cell; /* inline; */
+    width: 20%;
+    text-align: center;
+    } 
+
+#navbar ul li a { 
+    text-decoration: none;
+    padding: .2em 5em; 
+    color: white; 
+    background-color: #cc0000; 
+    } 
+
+#navbar ul li a:hover { 
+    color: #0EC6D7; 
+    background-color: #8B008B; 
+    } 
+
+</style> 
 </head>
-<body>
+<body> 
   <div id="container">
+    <div id="navbar"> 
+       <ul>  
+         <li><a href="#">Notes</a></li> 
+         <li><a href="#">Search</a></li> 
+         <li><a href="#">Community</a></li> 
+         <li><a href="#">Message</a></li>
+         <li><a href="#">Profile</a></li> 
+      </ul>
+    </div>
     <div id="user_nav">
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.
