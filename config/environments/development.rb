@@ -26,4 +26,14 @@ SocialScriptura::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  #turns off SSL in dev so that omniauth will work
+  #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+  TWITTER_KEY = 'R5s3oJCOx28qJERZDchr1A'
+  TWITTER_SECRET = 'h2uN2qXPawzs4bKQkUyBKrl4hvb9KUfJRnwKph46JA'
+
+  FACEBOOK_KEY = '753947497965703'
+  FACEBOOK_SECRET = '13c57ff71b7c0eb348b2692726935069'
+
 end
