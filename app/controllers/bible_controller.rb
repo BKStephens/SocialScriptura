@@ -3,7 +3,7 @@ require 'libxml'
 
 class BibleController < ApplicationController
   def index
-    xml_parser('sf_rsv.xml','1 Corinthians', '8')
+    xml_parser('asv.xml','1 Corinthians', '8')
   end
 
   def xml_parser(bible = "kjv.xml",book = "Genesis", chapter = "1")  
@@ -14,15 +14,13 @@ class BibleController < ApplicationController
 
     chapters = content.root.find('//XMLBIBLE/BIBLEBOOK[@bname="'+ book +'"]/CHAPTER[@cnumber="'+ chapter +'"]')
     
-    output = []
+    @output = []
 
     chapters.each do |entry|
       entry.find('VERS').each do |verse|
-      	output << verse["vnumber"]
-        output << verse.content
+      	@output << verse["vnumber"]
+        @output << verse.content
       end
     end
-
-  	raise output.to_yaml
   end
 end

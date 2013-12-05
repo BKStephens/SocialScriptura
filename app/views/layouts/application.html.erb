@@ -18,6 +18,8 @@ body                                                                   /* site b
  #navbar {
     display: table;
     width: 100%;
+    position: absolute;
+    top: 40px;
  }
 
  #navbar ul { 
@@ -48,19 +50,15 @@ body                                                                   /* site b
     background-color: #8B008B; 
     } 
 
+#user_nav {
+  position:absolute;
+  right:5px;
+}
+
 </style> 
 </head>
 <body> 
   <div id="container">
-    <div id="navbar"> 
-       <ul>  
-         <li><a href="bible#index">Notes</a></li> 
-         <li><a href="#">Search</a></li> 
-         <li><a href="#">Community</a></li> 
-         <li><a href="#">Message</a></li>
-         <li><a href="#">Profile</a></li> 
-      </ul>
-    </div>
     <div id="user_nav">
       <% if user_signed_in? %>
         Logged in as <strong><%= current_user.email %></strong>.
@@ -75,6 +73,16 @@ body                                                                   /* site b
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, id: "flash_#{name}" %>
     <% end %>
+
+    <div id="navbar"> 
+       <ul>  
+         <li><a href="bible#index">Notes</a></li> 
+         <li><a href="#">Search</a></li> 
+         <li><a href="#">Community</a></li> 
+         <li><a href="#">Message</a></li>
+         <li><a href="#">Profile</a></li> 
+      </ul>
+    </div>
   
     <%= yield %>
   </div>
