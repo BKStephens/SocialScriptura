@@ -3,7 +3,7 @@ require 'libxml'
 
 class BibleController < ApplicationController
   def index
-    xml_parser('kjv.xml','1 Corinthians', '8')
+    xml_parser('sf_rsv.xml','1 Corinthians', '8')
   end
 
   def xml_parser(bible = "kjv.xml",book = "Genesis", chapter = "1")  
