@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bible_verse_start: MyString
+  bible_verse_end: MyString
+  description: MyText
+  date_time_stamp: 
+
+two:
+  bible_verse_start: MyString
+  bible_verse_end: MyString
+  description: MyText
+  date_time_stamp: 

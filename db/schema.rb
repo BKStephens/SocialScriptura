@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204033739) do
+ActiveRecord::Schema.define(version: 20131206182529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.string   "bible_verse_start"
+    t.string   "bible_verse_end"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -35,9 +44,11 @@ ActiveRecord::Schema.define(version: 20131204033739) do
     t.string   "full_name"
     t.string   "denomination"
     t.string   "church"
+    t.integer  "user_id_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["user_id_id"], name: "index_users_on_user_id_id", using: :btree
 
 end
