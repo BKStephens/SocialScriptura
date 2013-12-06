@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :get_user
 
   def get_user
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
 
   # GET /comments
@@ -76,6 +76,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:bible_verse_start, :bible_verse_end, :description, :date_time_stamp)
+      params.require(:comment).permit(:bible_verse_start, :bible_verse_end, :description, :date_time_stamp, :user_id)
     end
 end

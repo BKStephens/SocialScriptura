@@ -4,6 +4,7 @@ require 'libxml'
 class BibleController < ApplicationController
   def index
     xml_parser('asv.xml','1 Corinthians', '8')
+    comment_section
   end
 
   def xml_parser(bible = "kjv.xml",book = "Genesis", chapter = "1")  
@@ -22,5 +23,9 @@ class BibleController < ApplicationController
         @output << verse.content
       end
     end
+  end
+
+  def comment_section
+    @bible_comment = Comment.new
   end
 end
