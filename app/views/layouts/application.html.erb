@@ -55,6 +55,10 @@ body                                                                   /* site b
   right:5px;
 }
 
+#body {
+  position:fixed;
+  top: 65px; 
+}
 </style> 
 </head>
 <body> 
@@ -83,9 +87,10 @@ body                                                                   /* site b
          <li><a href="#">Profile</a></li> 
       </ul>
     </div>
-  
+
+  <section id = "body">
     <%= yield %>
-  </div>
+  </section>
 
 </body>
 </html>
