@@ -44,13 +44,11 @@
 	<%= @output %>
 </article>
 <article id = "Comment">
-  <div> need to create a comments model and use a form <a href="http://rubydoc.info/github/plataformatec/simple_form/master/SimpleForm/FormBuilder:input_field">here</a>.
   <%= form_for @bible_comment do |c| %>
     <%= c.text_area :description %>
     <%= c.hidden_field :user_id, :value => current_user.id %>
     <%= c.submit %>
   <% end %>
-  </div>
 </article>
 <article id = "ContentStream">
   <div>Content Stream will go here</div>
