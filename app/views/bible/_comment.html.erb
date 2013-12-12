@@ -1,9 +1,13 @@
+<!-- this is not currently being used -->
+
 <head>
 </head>
 <body>
 <%= form_for (Comment.new, remote: true) do |c| %>
+<%= c.select_tag :bible_verse_end, options_for_select([['New York' ,'New york'], ['Los Angeles', 'Los Angeles']]) %>
 <%= c.text_area :description %>
 <%= c.hidden_field :user_id, :value => current_user.id %>
 <%= c.submit %>
 <% end %>
 </body>
+

@@ -8,4 +8,4 @@ $(document).ready ->
       data: $('form').serialize()
       dataType: 'json'
       success: (json) ->
-        $('form').find('textarea').val('')
+        $('#Comment form')[0].reset();
