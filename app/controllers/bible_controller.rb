@@ -3,24 +3,27 @@ require 'libxml'
 
 class BibleController < ApplicationController
   def index
-    xml_parser('asv.xml','1 Corinthians', '8')
+    initial_bible_view = BibleView.new('asv.xml', 'Genesis', 1)
+    puts initial_bible_view.inspect
+    xml_parser(initial_bible_view)
     comment_section
   end
-
-  def xml_parser(bible = "kjv.xml",book = "Genesis", chapter = "1")  
-  	xml = File.read('public/Bibles/' + bible)
-
+  
+  def xml_parser(bible_params)  
+  	xml = File.read("public/Bibles/#{bible_params.bible_version}")
+    
     source = LibXML::XML::Parser.string(xml)
     content = source.parse
 
-    chapters = content.root.find('//XMLBIBLE/BIBLEBOOK[@bname="'+ book +'"]/CHAPTER[@cnumber="'+ chapter +'"]')
+    chapters = content.root.find('//XMLBIBLE/BIBLEBOOK[@bname="'+bible_params.book+'"]/CHAPTER[@cnumber='+bible_params.chapter.to_s+']')
     
-    @output = []
-
+    @output = ''
     chapters.each do |entry|
       entry.find('VERS').each do |verse|
-      	@output << verse["vnumber"]
+        @output << verse["vnumber"]
+        @output << ' '
         @output << verse.content
+        @output << ' '
       end
     end
   end

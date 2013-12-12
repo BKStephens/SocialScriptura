@@ -41,7 +41,13 @@
 <body>
 <section>
 <article id = "Bible">
-	<%= @output %>
+  <%= form_for @bible_comment do |b|%>
+    <%= b.text_field :bible_verse_end, :placeholder => 'bible verse end' %>
+    <%= b.text_area :description %>
+    <%= b.hidden_field :user_id, :value => current_user.id %>
+    <%= b.submit %>
+  <% end %>
+  <%= @output %>
 </article>
 <article id = "Comment">
   <%= form_for @bible_comment do |c| %>

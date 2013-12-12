@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bible_version: MyString
+  book: MyString
+  chapter: 1
+  verse_from: 1
+  verse_to: 1
+
+two:
+  bible_version: MyString
+  book: MyString
+  chapter: 1
+  verse_from: 1
+  verse_to: 1
