@@ -1,6 +1,4 @@
 SocialScriptura::Application.routes.draw do
-  resources :comments
-
   root :to => 'welcome#index'
   #get "welcome/index"
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
@@ -59,4 +57,13 @@ SocialScriptura::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  resources :comments
+
+  get 'bible_views' => 'bible#index'
+  post 'bible_views' => 'bible#update_bible_view'
+  #patch 'bible_views' => 'bible#choose_bible_view'
+
+  #resources :bible_view, :path => 'bible#choose_bible_view', via: [:get,:post]
+  #get 'bible_view' => 'bible#choose_bible_view'
 end
