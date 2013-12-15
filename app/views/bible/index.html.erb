@@ -37,11 +37,10 @@
 	}
   </style>
 </head>
-
 <body>
 <section>
 <article id = "Bible">
-  <%= form_for @users_bible_view do |b| %>
+  <%= form_for @users_bible_view, :remote=>true do |b| %>
     <%= b.text_field :bible_version, :placeholder => 'KJV' %>
     <%= b.text_field :book, :placeholder => 'Genesis' %>
     <%= b.text_field :chapter, :placeholder => '1' %>
@@ -50,7 +49,7 @@
   <div id = "BibleOutput"><%= @output %></div>
 </article>
 <article id = "Comment">
-  <%= form_for @bible_comment do |c| %>
+  <%= form_for @bible_comment, :remote=>true do |c| %>
     <%= c.text_field :bible_verse_start, :placeholder => 'bible verse start' %>
     <%= c.text_field :bible_verse_end, :placeholder => 'bible verse end' %>
     <%= c.text_area :description %>
