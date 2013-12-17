@@ -1,7 +1,7 @@
 $(document).ready ->
-  $('article#Bible form').submit (event) ->
+  $('article#Bible').find('form').submit (event) ->
+    event.stopPropagation()
     event.preventDefault()
-    
     $.ajax
       type: 'POST'
       url: $(this).attr('action')
