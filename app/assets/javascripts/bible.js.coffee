@@ -11,3 +11,5 @@ $(document).ready ->
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json);
         #$("#BibleOutput").load(@output);
+      error: ->
+        alert "This junk errored out son"

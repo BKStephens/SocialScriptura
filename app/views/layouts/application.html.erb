@@ -3,8 +3,7 @@
 <head>
   <title>SocialScriptura</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <!-- had to add "rails" below because of Javascript not loading bug http://stackoverflow.com/questions/4227775/rails-form-for-remote-true-is-not-calling-js-method -->
-  <%= javascript_include_tag "rails", "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
   <!--part of devise setup-->
   <!-- <p class="notice"><%= notice %></p> -->
