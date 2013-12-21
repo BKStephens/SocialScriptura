@@ -1,4 +1,5 @@
 SocialScriptura::Application.routes.draw do
+  get "search/index"
   root :to => 'welcome#index'
   #get "welcome/index"
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
@@ -59,6 +60,7 @@ SocialScriptura::Application.routes.draw do
   #   end
 
   resources :comments
+  resources :search
 
   get 'bible_views' => 'bible#index'
   post 'bible_views' => 'bible#update_bible_view'

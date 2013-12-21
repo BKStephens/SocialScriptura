@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :user_name
   validates_uniqueness_of :user_name
+  
   # Setup accessible (or protected) attributes for your model
 
   #This is not needed in Rails 4

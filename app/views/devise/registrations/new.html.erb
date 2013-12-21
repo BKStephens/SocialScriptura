@@ -3,8 +3,11 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <div><%= f.label :full_name %><br />
+  <%= f.text_field :full_name, :autofocus => true %></div>  
+
   <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <%= f.email_field :email %></div>
   
   <div><%= f.label :user_name %><br />
   <%= f.text_field :user_name %></div>
@@ -17,6 +20,12 @@
     <%= f.password_field :password_confirmation %></div>
   <% end %>
   
+  <div><%= f.label :denomination %><br />
+  <%= f.text_field :denomination %></div>
+
+  <div><%= f.label :church %><br />
+  <%= f.text_field :church %></div>
+
   <div><%= f.submit "Sign up" %></div>
 <% end %>
 
