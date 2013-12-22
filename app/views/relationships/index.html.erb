@@ -9,7 +9,7 @@
 
 <h2>Friended by Users</h2>
 <ul>
-  <% for relationship in @user.inverse_relationships %>
+  <% for relationship in @user.relationships %>
     <li><%=h relationship.user.user_name %> (<%= link_to "remove", relationship, :method => :delete %>)</li>
   <% end %>
 </ul>

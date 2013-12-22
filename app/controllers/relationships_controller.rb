@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
+  #before_action :set_relationship, only: [:show, :edit, :update, :destroy]
 
   # GET /relationships
   # GET /relationships.json
@@ -11,7 +11,7 @@ class RelationshipsController < ApplicationController
   # GET /relationships/1
   # GET /relationships/1.json
   def show
-    @user = User.find(@relationship.user_id)
+    @user = current_user #User.find(@relationship.user_id)
   end
 
   # GET /relationships/new
@@ -26,9 +26,8 @@ class RelationshipsController < ApplicationController
   # POST /relationships
   # POST /relationships.json
   def create
-    @relationship = current_user.relationships.build(:friend_id => params[:friend_id])
-    #Relationship.new(relationship_params)
-
+    @relationship = current_user.relationships.request(user = current_user, friend = User.find(params[:friend_id]))
+    
     respond_to do |format|
       if @relationship.save
         format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
