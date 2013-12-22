@@ -1,3 +1,16 @@
-<% for user in @users %>
-  <%= user.full_name %>   <%= user.user_name %> <br>
-<% end %>
+<head>
+</head>
+<body>
+  <header>Users</header>
+  <article id="users">
+    <% for user in @users %>
+      <article class="user">
+        <p>
+          <%= user.full_name %>   <%= user.user_name %> <br>
+          <%= link_to "Add Friend", relationships_path(:friend_id => user), :method => :post %>
+          <article class="clear"></article>
+        </p>
+      </article>
+    <% end %>
+  </article>
+</body>

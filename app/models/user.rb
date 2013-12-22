@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  has_many :relationships
+  has_many :relations, :through => :relationships, :source => :friend
+  has_many :inverse_relationships, :class_name => "Relationship", :foreign_key => "friend_id"
+  has_many :inverse_relations, :through => :inverse_relationships, :source => :user
   has_many :comments, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
