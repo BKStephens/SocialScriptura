@@ -29,13 +29,22 @@ class RelationshipsController < ApplicationController
     @relationship = current_user.relationships.request(user = current_user, friend = User.find(params[:friend_id]))
     
     respond_to do |format|
-      if @relationship.save
-        format.html { redirect_to @relationship, notice: 'Relationship was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @relationship }
+      if @relationship
+        format.html { redirect_to '/relationships#index', notice: 'Friend request sent.' }
+        format.json { render action: 'index', status: :created, location: @relationship }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to '/relationships#index', notice: 'There is already a pending friend request' }
         format.json { render json: @relationship.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update
+    Relationship.accept(user = current_user.id, friend = params[:friend_id])
+    
+    respond_to do |format|
+      format.html { redirect_to '/relationships#index', notice: 'Friend request accepted.' }
+      format.json { render action: 'show', status: :created, location: '/relationships#index' }
     end
   end
 
@@ -56,7 +65,7 @@ class RelationshipsController < ApplicationController
   # DELETE /relationships/1
   # DELETE /relationships/1.json
   def destroy
-    @relationship.destroy
+    Relationship.destroy(user = current_user.id, friend = params[:friend_id])
     respond_to do |format|
       format.html { redirect_to relationships_url }
       format.json { head :no_content }

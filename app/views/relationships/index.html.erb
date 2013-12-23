@@ -2,17 +2,25 @@
 
 <h2>Friends</h2>
 <ul>
-  <% for relationship in @user.relationships %>
-    <li><%=h relationship.friend.user_name %> (<%= link_to "remove", relationship, :method => :delete %>)</li>
+  <% for friend in @user.accepted_friends %>
+    
+    <li><%=h friend.user_name %> (<%= link_to "remove", relationships_path(:friend_id => friend.id), :method => :delete %>)</li>
   <% end %>
 </ul>
 
-<h2>Friended by Users</h2>
+<h2>Pending Friend Request</h2>
+<ul>
+  <% for user in @user.pending_friends %>
+    <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationships_path(:friend_id => user), :method => :put %>)</li>
+  <% end %>
+</ul>
+
+<!-- <h2>Friended by Users</h2>
 <ul>
   <% for relationship in @user.relationships %>
     <li><%=h relationship.user.user_name %> (<%= link_to "remove", relationship, :method => :delete %>)</li>
   <% end %>
-</ul>
+</ul> -->
 
 <%= link_to 'Edit', edit_relationship_path(@relationship) %> |
 <%= link_to 'Back', relationships_path %>

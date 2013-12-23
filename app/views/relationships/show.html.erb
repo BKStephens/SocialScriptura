@@ -1,11 +1,1 @@
-<p>Username: <%=h @user.user_name %></p>
-
-<h2>Friends</h2>
-<ul>
-  <% for relationship in @user.relationships %>
-    <li><%=h relationship.friend.user_name %> (<%= link_to "remove", relationship, :method => :delete %>)</li>
-  <% end %>
-</ul>
-
-<%= link_to 'Edit', edit_relationship_path(@relationship) %> |
-<%= link_to 'Back', relationships_path %>
+<p>Find me under views/relationships/show.html.erb</p>
