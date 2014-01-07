@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_name
   
   # Setup accessible (or protected) attributes for your model
+  def self.comments
+    current_user.comment.all
+  end
 
   #This is not needed in Rails 4
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :church, :denomination, :user_name, :full_name

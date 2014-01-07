@@ -35,4 +35,14 @@ class Relationship < ActiveRecord::Base
     request = find_by_user_id_and_friend_id(user, friend)
     request.destroy!
   end  
+
+  def self.content_stream(user)
+    comments = []
+
+    user.accepted_friends.each do |r|
+      comments << r.comments
+    end
+
+    return comments
+  end
 end

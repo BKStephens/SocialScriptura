@@ -6,6 +6,7 @@ class BibleController < ApplicationController
     @users_bible_view ||= BibleView.new({:bible_version => 'asv.xml', :book => 'Genesis', :chapter => '1'})
     xml_parser(@users_bible_view)
     comment_section
+    content_stream
   end
   
   def xml_parser(bible_params)  
@@ -29,6 +30,11 @@ class BibleController < ApplicationController
 
   def comment_section
     @bible_comment = Comment.new
+  end
+
+  def content_stream
+    @content_stream = current_user.relationships.content_stream(current_user)
+    raise @content_stream.to_json
   end
 
   def update_bible_view
