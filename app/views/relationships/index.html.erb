@@ -4,14 +4,14 @@
 <ul>
   <% for friend in @user.accepted_friends %>
     
-    <li><%=h friend.user_name %> (<%= link_to "remove", relationships_path(:friend_id => friend.id), :method => :delete %>)</li>
+    <li><%=h friend.user_name %> (<%= link_to "remove", relationship_path(:id => current_user.id, :friend_id => friend.id), :method => :delete %>)</li>
   <% end %>
 </ul>
 
 <h2>Pending Friend Request</h2>
 <ul>
   <% for user in @user.pending_friends %>
-    <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationships_path(:friend_id => user), :method => :put %>)</li>
+    <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationship_path(:id => current_user.id, :friend_id => user), :method => :put %>)</li>
   <% end %>
 </ul>
 
