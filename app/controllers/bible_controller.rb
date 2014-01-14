@@ -33,8 +33,7 @@ class BibleController < ApplicationController
   end
 
   def content_stream
-    @content_stream = current_user.relationships.content_stream(current_user)
-    raise @content_stream.to_json
+    @content_stream = current_user.comments_around_chapter(@users_bible_view.book, @users_bible_view.chapter)
   end
 
   def update_bible_view

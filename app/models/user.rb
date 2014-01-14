@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  attr_accessor :comments_around_chapter
+
   has_many :relationships
   has_many :relations, 
            :through => :relationships, 
@@ -23,6 +25,10 @@ class User < ActiveRecord::Base
   validates_presence_of :user_name
   validates_uniqueness_of :user_name
   
+  def comments_around_chapter(book, chapter)
+    self.relationships.content_stream(self, book, chapter)
+  end
+
   # Setup accessible (or protected) attributes for your model
   def self.comments
     current_user.comment.all

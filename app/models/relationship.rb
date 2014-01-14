@@ -36,11 +36,11 @@ class Relationship < ActiveRecord::Base
     request.destroy!
   end  
 
-  def self.content_stream(user)
-    comments = []
+  def self.content_stream(user, book, chapter)
+    comments = Array.new
 
     user.accepted_friends.each do |r|
-      comments << r.comments
+      comments << r.comments#.where(:)
     end
 
     return comments
