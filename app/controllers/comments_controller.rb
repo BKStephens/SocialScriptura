@@ -78,6 +78,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:bible_verse_start, :bible_verse_end, :description, :date_time_stamp, :user_id)
+      params.require(:comment).permit(:book_start,:chapter_start,:verse_start,:chapter_end,:verse_end,:description,:date_time_stamp,:user_id)
     end
 end

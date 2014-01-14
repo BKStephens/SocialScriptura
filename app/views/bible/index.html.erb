@@ -50,8 +50,11 @@
 </article>
 <article id = "Comment">
   <%= form_for @bible_comment, :remote=>true do |c| %>
-    <%= c.text_field :bible_verse_start, :placeholder => 'bible verse start' %>
-    <%= c.text_field :bible_verse_end, :placeholder => 'bible verse end' %>
+    <%= c.text_field :book_start, :placeholder => 'book' %>
+    <%= c.text_field :chapter_start, :placeholder => 'chapter start' %>
+    <%= c.text_field :verse_start, :placeholder => 'verse start' %>
+    <%= c.text_field :chapter_end, :placeholder => 'chapter end' %>
+    <%= c.text_field :verse_end, :placeholder => 'verse end' %>
     <%= c.text_area :description %>
     <%= c.hidden_field :user_id, :value => current_user.id %>
     <%= c.submit %>
