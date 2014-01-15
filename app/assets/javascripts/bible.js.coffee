@@ -10,6 +10,7 @@ $(document).ready ->
       success: (json) ->     
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json);
-        #$("#BibleOutput").load(@output);
+        $("#ContentStream").empty();
+        $("#ContentStream").text(json);
       error: ->
         alert "This junk errored out son"

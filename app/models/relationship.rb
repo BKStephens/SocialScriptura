@@ -38,11 +38,19 @@ class Relationship < ActiveRecord::Base
 
   def self.content_stream(user, book, chapter)
     comments = Array.new
+    chapters_hash = chapters_around_chapter(chapter)
 
     user.accepted_friends.each do |r|
-      comments << r.comments#.where(:)
+      comments << r.comments.where(:book_start => book, :chapter_start => (chapters_hash['chapter_before_floor']..chapters_hash['chapter_after_ceiling']))
     end
 
     return comments
+  end
+
+  private
+  def self.chapters_around_chapter(chapter)
+    chapter_before_floor = chapter.to_i - 5 >= 1 ? chapter.to_i - 5 : 1 
+    chapter_after_ceiling = chapter.to_i + 5
+    chapters_hash = {"chapter_before_floor" => chapter_before_floor, "chapter_after_ceiling" => chapter_after_ceiling}
   end
 end

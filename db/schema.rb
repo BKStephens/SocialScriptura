@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114024422) do
+ActiveRecord::Schema.define(version: 20140114183848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,10 +22,10 @@ ActiveRecord::Schema.define(version: 20140114024422) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.text     "book_start"
-    t.text     "chapter_start"
-    t.text     "verse_start"
-    t.text     "chapter_end"
-    t.text     "verse_end"
+    t.integer  "chapter_start"
+    t.integer  "verse_start"
+    t.integer  "chapter_end"
+    t.integer  "verse_end"
   end
 
   create_table "relationships", force: true do |t|
