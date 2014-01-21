@@ -9,8 +9,8 @@ $(document).ready ->
       dataType: 'json'
       success: (json) ->     
         $("#BibleOutput").empty();
-        $("#BibleOutput").text(json);
+        $("#BibleOutput").text(json.bible_content);
         $("#ContentStream").empty();
-        $("#ContentStream").text(json);
+        $("#ContentStream").text(json.content_stream);
       error: ->
         alert "This junk errored out son"

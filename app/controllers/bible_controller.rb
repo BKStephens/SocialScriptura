@@ -42,15 +42,12 @@ class BibleController < ApplicationController
     content_stream
     
     respond_to do |format|
-        format.html { render json: @output.to_json }
+        format.html { render :json => { :bible_content => @output,
+                                        :content_stream => @content_stream }}
         format.js
-        format.json { render json: @output.to_json }
+        format.json { render :json => { :bible_content => @output,
+                                :content_stream => @content_stream.to_json }}
     end
-    #respond_to do |format|
-    #  format.html { render json: @users_bible_view.to_json }
-    #  format.js
-    #  format.json { render json: @users_bible_view.to_json }
-    #end
   end
 
   private

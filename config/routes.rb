@@ -1,4 +1,6 @@
 SocialScriptura::Application.routes.draw do
+  resources :zombies
+
   get "search/index"
   root :to => 'welcome#index'
   #get "welcome/index"
