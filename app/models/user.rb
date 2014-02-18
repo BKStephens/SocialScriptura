@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessor :comments_around_chapter
+  attr_accessor :comments_around_chapter, :most_recent_content_stream
 
   has_many :relationships
   has_many :relations, 
@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
   
   def comments_around_chapter(book, chapter)
     self.relationships.content_stream(self, book, chapter)
+  end
+
+  def most_recent_content_stream
+    self.relationships.most_recent_content_stream(self)
   end
 
   # Setup accessible (or protected) attributes for your model

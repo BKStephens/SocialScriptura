@@ -6,6 +6,7 @@ class RelationshipsController < ApplicationController
   def index
     #@relationships = Relationship.all
     @user = current_user
+    content_stream
   end
 
   # GET /relationships/1
@@ -19,6 +20,11 @@ class RelationshipsController < ApplicationController
     @relationship = Relationship.new
   end
 
+
+  def content_stream
+      @content_stream = current_user.most_recent_content_stream
+      # raise @content_stream.to_yaml
+  end
   # GET /relationships/1/edit
   # def edit
   # end
