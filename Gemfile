@@ -47,8 +47,13 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+
 gem 'omniauth-twitter'
+
 gem 'omniauth-facebook'
+
 gem 'libxml-ruby'
-gem 'thin'
+
+gem 'puma'
+
 gem 'jquery-turbolinks'
