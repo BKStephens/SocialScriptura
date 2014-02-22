@@ -32,12 +32,6 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_name
   
   def comments_around_chapter(book, chapter)
-        # acts_as_messageable test
-    @alice = User.first
-    @bob   = User.last
-
-    @alice.send_message(@bob, "Message topic", "I am the one who knocks!")
-    @bob.send_message(@alice, "Re: Message topic", "Hi alice!")
     self.relationships.content_stream(self, book, chapter)
   end
 

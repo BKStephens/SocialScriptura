@@ -1,0 +1,49 @@
+<head>
+  <style>
+    section {
+        padding: 100px;
+    }
+
+  #Inbox { 
+    position: fixed;
+    margin-top: -80px;
+    width: 40%;
+    height: 90%;
+    border-style:solid;
+    border-width:2px;
+    word-wrap: break-word;
+  }
+
+  #Message { 
+    position: fixed;
+    margin-top: -80px;
+    right: 70px;
+    width: 40%;
+    height: 30%;
+    border-style:solid;
+    border-width:2px;
+    word-wrap: break-word;
+  }
+  </style>
+</head>
+<body>
+  <article id = "Inbox">
+    <% for message in @messages %>
+      <article class="message">
+        <p>
+          <%= message.topic %> <br>   
+          <%= message.body %> <br>
+        </p>
+      </article>
+    <% end %>
+  </article>
+  <article id = "Message">
+  <%= form_for Message.new, :remote=>true do |m| %>
+    <%= m.text_field :received_messageable_id, :placeholder => 'Insert user id to send message too - need to fix this so that usernames can be used' %>
+    <%= m.text_field :topic, :placeholder => 'Subject' %>
+    <%= m.text_area :body , :placeholder => 'Body' %>
+    <%= m.hidden_field :sent_messageable_id, :value => current_user.id %>
+    <%= m.submit %>
+  <% end %>
+</article>
+</body>

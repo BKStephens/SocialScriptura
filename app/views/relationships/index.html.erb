@@ -45,17 +45,10 @@
         <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationship_path(:id => current_user.id, :friend_id => user), :method => :put %>)</li>
       <% end %>
       </ul>
+  </article>
 
-<!-- <h2>Friended by Users</h2>
-<ul>
-  <% for relationship in @user.relationships %>
-    <li><%=h relationship.user.user_name %> (<%= link_to "remove", relationship, :method => :delete %>)</li>
-  <% end %>
-</ul> -->
-    </article>
-
-    <article id = "ContentStream">
-      <div><%=@content_stream.to_s %></div>
-    </article>
+  <article id = "ContentStream">
+    <div><%=@content_stream.to_s %></div>
+  </article>
   </section>
 </body>

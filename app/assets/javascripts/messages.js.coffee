@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('article#Comment').find('form').submit (event) ->
+  $('article#Message').find('form').submit (event) ->
     event.stopPropagation()
     event.preventDefault()
     $.ajax
@@ -8,6 +8,6 @@ $(document).ready ->
       data: $('form').serialize()
       dataType: 'json'
       success: (json) ->
-        $('#Comment form')[0].reset()
+        $('#Message form')[0].reset()
       error: ->
         alert "A problem occured with sending this message."
