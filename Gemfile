@@ -57,3 +57,5 @@ gem 'libxml-ruby'
 gem 'puma'
 
 gem 'jquery-turbolinks'
+
+gem 'acts-as-messageable'

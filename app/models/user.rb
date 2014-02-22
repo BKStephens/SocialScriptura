@@ -22,10 +22,22 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  acts_as_messageable :table_name => "messages",
+                      :required   => [:topic, :body],
+                      :class_name => "ActsAsMessageable::Message",
+                      :dependent  => :destroy,
+                      :group_messages => true
+
   validates_presence_of :user_name
   validates_uniqueness_of :user_name
   
   def comments_around_chapter(book, chapter)
+        # acts_as_messageable test
+    @alice = User.first
+    @bob   = User.last
+
+    @alice.send_message(@bob, "Message topic", "I am the one who knocks!")
+    @bob.send_message(@alice, "Re: Message topic", "Hi alice!")
     self.relationships.content_stream(self, book, chapter)
   end
 
