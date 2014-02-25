@@ -1,28 +1,12 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This repo uses Ruby 2.0.0p353 and Rails 4.0.2
 
-Things you may want to cover:
+If you want to use sign in with Twitter or sign in with Facebook in your dev environment, create a .env file at the root of the project with your key and secret. Here is an example of the .env file:
+TWITTER_KEY = ENTER_YOUR_KEY_HERE
+TWITTER_SECRET = ENTER_YOUR_TWITTER_SECRET_HERE
 
-* Ruby version
+FACEBOOK_KEY = ENTER_YOUR_KEY_HERE
+FACEBOOK_SECRET = ENTER_YOUR_FACEBOOK_SECRET_HERE
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To setup your dev environment, run 'bundle' from the command line.
