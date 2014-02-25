@@ -1,6 +1,5 @@
-class BibleView #< ActiveRecord::Base
+class BibleView
   include ActiveModel::Validations
-  #are these two below necessary?
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
@@ -16,12 +15,5 @@ class BibleView #< ActiveRecord::Base
 
   def persisted?
     false
-  end
-
-  def update(params = {})
-    p "I am the one who knocks!"
-    #params.each do |name, value|
-    #  self.name = value
-    #end
   end
 end

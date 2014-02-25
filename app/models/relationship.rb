@@ -58,9 +58,9 @@ class Relationship < ActiveRecord::Base
   end
 
   private
-  def self.chapters_around_chapter(chapter)
-    chapter_before_floor = chapter.to_i - 5 >= 1 ? chapter.to_i - 5 : 1 
-    chapter_after_ceiling = chapter.to_i + 5
-    chapters_hash = {"chapter_before_floor" => chapter_before_floor, "chapter_after_ceiling" => chapter_after_ceiling}
-  end
+    def self.chapters_around_chapter(chapter)
+      chapter_before_floor = chapter.to_i - 5 >= 1 ? chapter.to_i - 5 : 1 
+      chapter_after_ceiling = chapter.to_i + 5
+      chapters_hash = {"chapter_before_floor" => chapter_before_floor, "chapter_after_ceiling" => chapter_after_ceiling}
+    end
 end
