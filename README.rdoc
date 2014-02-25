@@ -1,12 +1,13 @@
-== README
-
 This repo uses Ruby 2.0.0p353 and Rails 4.0.2
 
 If you want to use sign in with Twitter or sign in with Facebook in your dev environment, create a .env file at the root of the project with your key and secret. Here is an example of the .env file:
-TWITTER_KEY = ENTER_YOUR_KEY_HERE
+
+TWITTER_KEY = ENTER_YOUR_KEY_HERE 
+
 TWITTER_SECRET = ENTER_YOUR_TWITTER_SECRET_HERE
 
 FACEBOOK_KEY = ENTER_YOUR_KEY_HERE
+
 FACEBOOK_SECRET = ENTER_YOUR_FACEBOOK_SECRET_HERE
 
 To setup your dev environment, run 'bundle' from the command line.
