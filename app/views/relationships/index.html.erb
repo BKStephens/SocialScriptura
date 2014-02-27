@@ -1,54 +1,28 @@
 <head>
-  <style>
-    section {
-        padding: 100px;
-    }
-
-	#Friends { 
-		position: fixed;
-		margin-top: -150px;
-		width: 40%;
-		height: 90%;
-		border-style:solid;
-		border-width:2px;
-		word-wrap: break-word;
-	}
-
-	#ContentStream { 
-		position: fixed;
-		margin-top: -150px;
-		right: 70px;
-		width: 40%;
-		height: 90%;
-		border-style:solid;
-		border-width:2px;
-		word-wrap: break-word;
-	}
-  </style>
 </head>
 <body>
   <section>
-	<article id = "Friends">
-      <p>Username: <%=h @user.user_name %></p>
+	<article class ="row">
+    <article id = "Friends" class = "large-6 columns">
+        <h2>Friends</h2>
+        <ul>
+        <% for friend in @user.accepted_friends %>
+      
+          <li><%=h friend.user_name %> (<%= link_to "remove", relationship_path(:id => current_user.id, :friend_id => friend.id), :method => :delete %>)</li>
+        <% end %>
+        </ul>
 
-      <h2>Friends</h2>
-      <ul>
-      <% for friend in @user.accepted_friends %>
-    
-        <li><%=h friend.user_name %> (<%= link_to "remove", relationship_path(:id => current_user.id, :friend_id => friend.id), :method => :delete %>)</li>
-      <% end %>
-      </ul>
+        <h2>Pending Friend Request</h2>
+        <ul>
+        <% for user in @user.pending_friends %>
+          <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationship_path(:id => current_user.id, :friend_id => user), :method => :put %>)</li>
+        <% end %>
+        </ul>
+    </article>
 
-      <h2>Pending Friend Request</h2>
-      <ul>
-      <% for user in @user.pending_friends %>
-        <li><%=h user.user_name %> (<%= link_to "Accept Friend", relationship_path(:id => current_user.id, :friend_id => user), :method => :put %>)</li>
-      <% end %>
-      </ul>
-  </article>
-
-  <article id = "ContentStream">
-    <div><%=@content_stream.to_s %></div>
+    <article id = "ContentStream" class = "large-6 columns">
+      <div><%=@content_stream.to_s %></div>
+    </article>
   </article>
   </section>
 </body>

@@ -1,91 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>SocialScriptura</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-  <p class="alert"><%= alert %></p>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
 
-<style type="text/css"> 
-  body {
-    margin: 0; 
-  }
-  #navbar {
-    display: table;
-    width: 100%;
-    position: absolute;
-    top: 40px;
-  }
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  #navbar ul { 
-    margin: 0; 
-    padding: 5px; 
-    cellspacing: 0;
-    cellpadding: 0;
-    border: 0;
-    list-style-type: none; 
-    background-color: #cc0000; 
-  } 
+  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-  #navbar ul li {  
-    display: table-cell;
-    width: 20%;
-    text-align: center;
-  } 
+  	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  	<%= javascript_include_tag "vendor/custom.modernizr", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
 
-  #navbar ul li a { 
-    text-decoration: none;
-    padding: .2em 5em; 
-    color: white; 
-    background-color: #cc0000; 
-  } 
-
-  #navbar ul li a:hover { 
-    color: #0EC6D7; 
-    background-color: #8B008B; 
-  } 
-
-  #user_nav {
-    position:absolute;
-    right:5px;
-  }
-
-  #body {
-    position:fixed;
-    top: 65px; 
-  }
-</style> 
-</head>
-<body> 
-  <div id="container">
-    <div id="user_nav">
-      <% if user_signed_in? %>
-        Logged in as <strong><%= current_user.email %></strong>.
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %>
-        <%= link_to "Login", new_user_session_path %>
-      <% end %>
-    </div>
-
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-    <% end %>
-
-    <div id="navbar"> 
-       <ul>  
-         <li><a href="bible">Notes</a></li> 
-         <li><a href="search">Search</a></li> 
-         <li><a href="relationships">Community</a></li> 
-         <li><a href="messages">Message</a></li>
-         <li><a href="/users/edit">Profile</a></li> 
+  <body>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "Social Scriptura", root_path %></h1>
+        </li>
       </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><a href="bible">Read & Comment</a></li>
+          <li class="divider"></li>
+          <li><a href="search">Search</a></li>
+          <li class="divider"></li>
+          <li><a href="relationships">Community</a></li>
+          <li class="divider"></li>
+          <li><a href="messages">Message</a></li>
+          <li class="divider"></li>
+          <% if user_signed_in? %>
+            <li><a href="/users/edit"><%= current_user.user_name %></a></li>
+            <li class="divider"></li>                          
+            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+          <% else %>            
+            <li><%= link_to "Login", new_user_session_path %></li>
+            <li class="divider"></li>  
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <% end %>
+          </li>        
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+      <section id="body" class="larger-12 columns"><%= yield %></section>
     </div>
-
-  <section id = "body">
-    <%= yield %>
-  </section>
-
-</body>
+    
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  </body>
 </html>

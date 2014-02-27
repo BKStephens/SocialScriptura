@@ -2,6 +2,7 @@ SocialScriptura::Application.routes.draw do
   root :to => 'welcome#index'
   devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
+  resources :welcome
   resources :comments
   resources :search
   resources :relationships do

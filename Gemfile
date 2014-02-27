@@ -47,15 +47,10 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
-
 gem 'omniauth-twitter'
-
 gem 'omniauth-facebook'
-
 gem 'libxml-ruby'
-
 gem 'puma'
-
 gem 'jquery-turbolinks'
-
 gem 'acts-as-messageable'
+gem 'zurb-foundation'

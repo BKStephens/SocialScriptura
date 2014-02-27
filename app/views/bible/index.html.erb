@@ -1,67 +1,33 @@
 <head>
-  <style>
-    section {
-        padding: 100px;
-    }
-
-	#Bible { 
-		position: fixed;
-		margin-top: -150px;
-		width: 40%;
-		height: 90%;
-		border-style:solid;
-		border-width:2px;
-		word-wrap: break-word;
-	}
-
-	#Comment { 
-		position: fixed;
-		margin-top: -150px;
-		right: 70px;
-		width: 40%;
-		height: 30%;
-		border-style:solid;
-		border-width:2px;
-		word-wrap: break-word;
-	}
-
-	#ContentStream { 
-		position: fixed;
-		margin-top: 100px;
-		right: 70px;
-		width: 40%;
-		height: 59%;
-		border-style:solid;
-		border-width:2px;
-		word-wrap: break-word;
-	}
-  </style>
+  
 </head>
 <body>
 <section>
-<article id = "Bible">
-  <%= form_for @users_bible_view, :remote=>true do |b| %>
-    <%= b.text_field :bible_version, :placeholder => 'KJV' %>
-    <%= b.text_field :book, :placeholder => 'Genesis' %>
-    <%= b.text_field :chapter, :placeholder => '1' %>
-    <%= b.submit %>
-  <% end %>
-  <div id = "BibleOutput"><%= @output %></div>
-</article>
-<article id = "Comment">
-  <%= form_for @bible_comment, :remote=>true do |c| %>
-    <%= c.text_field :book_start, :placeholder => 'book' %>
-    <%= c.text_field :chapter_start, :placeholder => 'chapter start' %>
-    <%= c.text_field :verse_start, :placeholder => 'verse start' %>
-    <%= c.text_field :chapter_end, :placeholder => 'chapter end' %>
-    <%= c.text_field :verse_end, :placeholder => 'verse end' %>
-    <%= c.text_area :description %>
-    <%= c.hidden_field :user_id, :value => current_user.id %>
-    <%= c.submit %>
-  <% end %>
-</article>
-<article id = "ContentStream">
-  <div><%=@content_stream.to_s %></div>
+<article class ="row">
+	<article id = "Bible" class = "large-8 columns">
+	  <%= form_for @users_bible_view, :remote=>true do |b| %>
+	    <%= b.text_field :bible_version, :placeholder => 'KJV' %>
+	    <%= b.text_field :book, :placeholder => 'Genesis' %>
+	    <%= b.text_field :chapter, :placeholder => '1' %>
+	    <%= b.submit %>
+	  <% end %>
+	  <div id = "BibleOutput"><%= @output %></div>
+	</article>
+	<article id = "Comment" class = "large-4 columns">
+	  <%= form_for @bible_comment, :remote=>true do |c| %>
+	    <%= c.text_field :book_start, :placeholder => 'book' %>
+	    <%= c.text_field :chapter_start, :placeholder => 'chapter start' %>
+	    <%= c.text_field :verse_start, :placeholder => 'verse start' %>
+	    <%= c.text_field :chapter_end, :placeholder => 'chapter end' %>
+	    <%= c.text_field :verse_end, :placeholder => 'verse end' %>
+	    <%= c.text_area :description %>
+	    <%= c.hidden_field :user_id, :value => current_user.id %>
+	    <%= c.submit %>
+	  <% end %>
+	</article>
+	<article id = "ContentStream">
+	  <div><%=@content_stream.to_s %></div>
+	</article>
 </article>
 </section>
 </body>
