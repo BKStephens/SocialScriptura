@@ -6,8 +6,10 @@
 <article class ="row">
 	<article id = "Bible" class = "large-8 columns">
 	  <%= form_for @users_bible_view, :remote=>true do |b| %>
-	    <%= b.text_field :bible_version, :placeholder => 'KJV' %>
-	    <%= b.text_field :book, :placeholder => 'Genesis' %>
+	    <%= collection_select(:user, :bible_version_id, BibleVersion.all, :id, :name) %>
+	    <!-- <%= b.text_field :bible_version, :placeholder => 'KJV' %> -->
+	    <!-- <%= b.text_field :book, :placeholder => 'Genesis' %> -->
+	    <%= select(:book, :book_start, ['Genesis', 'Exodus']) %>
 	    <%= b.text_field :chapter, :placeholder => '1' %>
 	    <%= b.submit %>
 	  <% end %>

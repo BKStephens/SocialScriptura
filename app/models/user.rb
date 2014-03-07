@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
            :source => :friend,
            :conditions => "status = 'accepted'"
   has_many :comments, dependent: :destroy
+  has_one :bible_version, :class_name => 'BibleVersion'
 
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
