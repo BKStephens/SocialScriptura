@@ -10,4 +10,7 @@ FACEBOOK_KEY = ENTER_YOUR_KEY_HERE
 
 FACEBOOK_SECRET = ENTER_YOUR_FACEBOOK_SECRET_HERE
 
-To setup your dev environment, run 'bundle' from the command line.
+To setup your dev environment, 
+run 'bundle'
+run 'rake db:migrate'
+run 'rake db:seed'
