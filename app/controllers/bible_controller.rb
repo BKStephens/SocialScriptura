@@ -3,7 +3,7 @@ require 'libxml'
 
 class BibleController < ApplicationController
   def index
-    @users_bible_view ||= BibleView.new({:bible_version => 'asv.xml', :book => 'Genesis', :chapter => '1'})
+    @users_bible_view ||= BibleView.new({:bible_version => 'asv.xml', :book => 'Genesis', :chapter => '116'})
     xml_parser(@users_bible_view)
     comment_section
     content_stream
@@ -54,6 +54,6 @@ class BibleController < ApplicationController
   private
 
    def comment_params
-      params.require(:bible_view).permit(:bible_version, :book, :chapter, :verse_from, :verse_to)
+      params.require(:bible_view).permit(:bible_version, :chapter, :verse_from, :verse_to)
     end
 end
