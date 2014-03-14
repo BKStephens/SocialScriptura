@@ -19,35 +19,47 @@
   </head>
 
   <body>
-    <nav class="top-bar">
-      <ul class="title-area">
-        <li class="name">
-          <h1><%= link_to "Social Scriptura", root_path %></h1>
-        </li>
-      </ul>
-      <section class="top-bar-section">
-        <ul class="right">
-          <li class="divider"></li>
-          <li><a href="bible">Read & Comment</a></li>
-          <li class="divider"></li>
-          <li><a href="search">Search</a></li>
-          <li class="divider"></li>
-          <li><a href="relationships">Community</a></li>
-          <li class="divider"></li>
-          <li><a href="messages">Message</a></li>
-          <li class="divider"></li>
-          <% if user_signed_in? %>
-            <li><a href="/users/edit"><%= current_user.user_name %></a></li>
-            <li class="divider"></li>                          
-            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-          <% else %>            
-            <li><%= link_to "Login", new_user_session_path %></li>
-            <li class="divider"></li>  
-            <li><%= link_to "Sign Up", new_user_registration_path %></li>
-          <% end %>
-          </li>        
+    <nav class="fixed">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><%= link_to "Social Scriptura", root_path %></h1>
+          </li>
         </ul>
-      </section>
+        <section class="top-bar-section">
+          <ul class="left">
+            <li class="divider"></li>
+            <li class="has-form">
+              <div class="row collapse">
+                <div class="large-8 small-9 columns">
+                  <input type="text" placeholder="Find Users and Bible Passages">
+                </div>
+                <div class="large-4 small-3 columns">
+                  <a href="search" class="alert button expand">Search</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="right">
+            <li class="divider"></li>
+            <li><a href="relationships">Community</a></li>          
+             <li class="divider"></li>
+            <li><a href="bible">Read &amp; Comment</a></li>
+            <li class="divider"></li>
+            <li><a href="messages">Message</a></li>
+            <li class="divider"></li>
+            <% if user_signed_in? %>
+              <li><a href="/users/edit"><%= current_user.user_name %></a></li>
+              <li class="divider"></li>                          
+              <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+            <% else %>            
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <li class="divider"></li>  
+              <li><%= link_to "Login", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </section>
+      </nav>
     </nav>
     <div class="row">
       <% flash.each do |name, msg| %>
