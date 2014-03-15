@@ -1261,7 +1261,7 @@ $topbar-bg-color: #A31919;
 // Height and margin
 
 // $topbar-height: 45px;
-// $topbar-margin-bottom: 0;
+$topbar-margin-bottom: 1rem;
 
 // Control Input height for top bar
 
@@ -1311,13 +1311,13 @@ $topbar-bg-color: #A31919;
 // Transitions and breakpoint styles
 
 // $topbar-transition-speed: 300ms;
-// $topbar-breakpoint: 940 !default; // Change to 9999px for always mobile layout
-// $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})";
+ $topbar-breakpoint: 65em !default; // Change to 9999px for always mobile layout
+ $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})";
 
 // Divider Styles
 
 // $topbar-divider-border-bottom: solid 1px lighten($topbar-bg-color, 10%);
-//  $topbar-divider-border-top: solid 1px darken($topbar-bg-color, 10%);
+// $topbar-divider-border-top: solid 1px darken($topbar-bg-color, 10%);
 
 // Sticky Class
 

@@ -11,7 +11,7 @@
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  	<title><%= content_for?(:title) ? yield(:title) : "SocialScriptura" %></title>
 
   	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   	<%= javascript_include_tag "vendor/custom.modernizr", "data-turbolinks-track" => true %>
@@ -19,25 +19,28 @@
   </head>
 
   <body>
-    <nav class="fixed">
+    <nav class="sticky">
       <nav class="top-bar" data-topbar>
         <ul class="title-area">
           <li class="name">
             <h1><%= link_to "Social Scriptura", root_path %></h1>
           </li>
+          <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
         </ul>
         <section class="top-bar-section">
           <ul class="left">
             <li class="divider"></li>
             <li class="has-form">
-              <div class="row collapse">
-                <div class="large-8 small-9 columns">
-                  <input type="text" placeholder="Find Users and Bible Passages">
+              <form>
+                <div class="row collapse">
+                  <div class="small-10 columns">
+                    <input class="search" type="text" placeholder="Find Users and Bible Passages">
+                  </div>
+                  <div class="small-2 columns">
+                    <a href="search" class="alert button">Search</a>
+                  </div>
                 </div>
-                <div class="large-4 small-3 columns">
-                  <a href="search" class="alert button expand">Search</a>
-                </div>
-              </div>
+              </form>
             </li>
           </ul>
           <ul class="right">
