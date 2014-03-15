@@ -1311,7 +1311,7 @@ $topbar-margin-bottom: 1rem;
 // Transitions and breakpoint styles
 
 // $topbar-transition-speed: 300ms;
- $topbar-breakpoint: 65em !default; // Change to 9999px for always mobile layout
+ $topbar-breakpoint: 65rem !default; // Change to 9999px for always mobile layout
  $topbar-media-query: "only screen and (min-width: #{$topbar-breakpoint})";
 
 // Divider Styles
