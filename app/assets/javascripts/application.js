@@ -16,5 +16,6 @@
 //= require jquery.turbolinks
 //= require turbolinks
 //= require_tree .
+//= require modernizr
 
 window.onload = (function(){ $(document).foundation(); });
