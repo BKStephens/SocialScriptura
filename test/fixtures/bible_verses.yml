@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  bible_chapters_id: 
+  bible_verse: 1
+
+two:
+  bible_chapters_id: 
+  bible_verse: 1

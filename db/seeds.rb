@@ -1,10 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'open-uri'
+require 'libxml'
+
+BibleVersion.delete_all
+BibleBooks.delete_all
+BibleChapters.delete_all
+BibleVerse.delete_all
 
 bible_version = [
   [ 'American Standard Version', 'ASV', 'asv.xml' ],
@@ -18,7 +18,7 @@ end
 
 books_list = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth',
 	'1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah',
-	'Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah',
+	'Esther','Job','Psalm','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah',
 	'Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum',
 	'Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts',
 	'Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians',
@@ -120,7 +120,7 @@ end
 end
 
 (1..150).each do |i|
-  temp = BibleBooks.find_by book: 'Psalms'
+  temp = BibleBooks.find_by book: 'Psalm'
   BibleChapters.create(chapters: i, bible_books_id: temp.id )
 end
 
@@ -357,4 +357,26 @@ end
 (1..22).each do |i|
   temp = BibleBooks.find_by book: 'Revelation'
   BibleChapters.create(chapters: i, bible_books_id: temp.id )
+end
+
+xml = File.read("public/Bibles/asv.xml")
+  
+source = LibXML::XML::Parser.string(xml)
+content = source.parse
+verses = Array.new
+
+content.find('//XMLBIBLE/BIBLEBOOK').each do |book|
+  content.find('//XMLBIBLE/BIBLEBOOK[@bname="'+ book["bname"] +'"]/CHAPTER').each do |chapter| 
+    content.find('//XMLBIBLE/BIBLEBOOK[@bname="'+ book["bname"] +'"]/CHAPTER[@cnumber='+ chapter["cnumber"] +']/VERS').each  do |verse|
+      verses << [book["bname"], chapter["cnumber"].to_i, verse["vnumber"].to_i]
+    end
+  end
+end
+
+verses.each do |v|
+  bible_book = BibleBooks.where(:book => v[0]).select("id")
+  bible_chapter = BibleChapters.where(:chapters => v[1].to_i, :bible_books_id => bible_book).select("id").first
+  if bible_chapter[:id] > 0 && v[2].to_i > 0 then
+    BibleVerse.create(bible_chapters_id: bible_chapter[:id], bible_verse: v[2].to_i)
+  end
 end

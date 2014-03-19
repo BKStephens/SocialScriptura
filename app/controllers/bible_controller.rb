@@ -3,7 +3,7 @@ require 'libxml'
 
 class BibleController < ApplicationController
   def index
-    @users_bible_view ||= BibleView.new({:bible_version => 'asv.xml', :book => 'Genesis', :chapter => '116'})
+    @users_bible_view ||= BibleView.new({:bible_version => 'asv.xml', :book => 'Genesis', :chapter => '13180'})
     xml_parser(@users_bible_view)
     comment_section
     content_stream
