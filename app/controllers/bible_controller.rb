@@ -38,7 +38,6 @@ class BibleController < ApplicationController
 
   def update_bible_view
     @users_bible_view = BibleView.new(comment_params)
-    print @users_bible_view.to_json
     xml_parser(@users_bible_view)
     content_stream
     
