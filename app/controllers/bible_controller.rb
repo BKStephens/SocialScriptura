@@ -2,6 +2,8 @@ require 'open-uri'
 require 'libxml'
 
 class BibleController < ApplicationController
+  before_filter :authenticate_user!
+  
   def index
     @users_bible_view ||= BibleView.new
     xml_parser(@users_bible_view)

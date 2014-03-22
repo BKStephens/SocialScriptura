@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :get_user
 
@@ -8,6 +9,14 @@ class CommentsController < ApplicationController
 
   def index
     @comments = Comment.all
+  end
+
+   def update_verses
+    bible_verses = BibleVerse.load_verses(comment_params[:chapter_start])
+    
+    respond_to do |format|
+      format.json { render json: bible_verses.to_json }
+    end
   end
 
   def show
