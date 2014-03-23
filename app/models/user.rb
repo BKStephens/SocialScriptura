@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     current_user.comment.all
   end
 
+  def self.all_comments
+    Comment.all
+  end
+
   def self.from_omniauth(auth)
   	where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider

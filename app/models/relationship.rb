@@ -37,24 +37,26 @@ class Relationship < ActiveRecord::Base
   end  
 
   def self.content_stream(user, book, chapter)
-    comments = Array.new
     chapters_hash = chapters_around_chapter(chapter)
-
-    user.accepted_friends.each do |r|
-      comments << r.comments.where(:book_start => book, :chapter_start => (chapters_hash['chapter_before_floor']..chapters_hash['chapter_after_ceiling']))
-    end
-
-    return comments
+    user_ids = user.accepted_friends.pluck('users.id').to_a
+    user_ids << user[:id].to_i
+    
+    comments = User.all_comments
+    .where(
+      :user_id => user_ids,
+      :book_start => book,
+      :chapter_start => (chapters_hash['chapter_before_floor']..chapters_hash['chapter_after_ceiling'])
+    ).order('created_at DESC').to_a
   end
 
   def self.most_recent_content_stream(user)
-    comments = Array.new
+    user_ids = user.accepted_friends.pluck('users.id').to_a
+    user_ids << user[:id].to_i
     
-    user.accepted_friends.each do |r|
-      comments << r.comments.order("created_at DESC").all
-    end
-
-    return comments
+    comments = User.all_comments
+    .where(
+      :user_id => user_ids
+    ).order('created_at DESC').to_a
   end
 
   private
