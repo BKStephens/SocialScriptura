@@ -1,9 +1,7 @@
-require 'open-uri'
-require 'libxml'
-
 class BibleController < ApplicationController
   before_filter :authenticate_user!
-  
+  require 'XmlParser'
+
   def index
     @users_bible_view ||= BibleView.new
     xml_parser(@users_bible_view)
@@ -12,22 +10,8 @@ class BibleController < ApplicationController
   end
   
   def xml_parser(bible_params)  
-  	xml = File.read("public/Bibles/#{bible_params.bible_version}")
-    
-    source = LibXML::XML::Parser.string(xml)
-    content = source.parse
-
-    chapters = content.root.find('//XMLBIBLE/BIBLEBOOK[@bname="'+bible_params.book+'"]/CHAPTER[@cnumber='+bible_params.chapter.to_s+']')
-    
-    @output = ''
-    chapters.each do |entry|
-      entry.find('VERS').each do |verse|
-        @output << verse["vnumber"]
-        @output << ' '
-        @output << verse.content
-        @output << ' '
-      end
-    end
+  	parser = ::XmlParser.new
+    @output = parser.parse_chapters(bible_params)
   end
 
   def comment_section

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :comments_around_chapter, :most_recent_content_stream
+  require 'XmlParser'
 
   has_many :relationships
   has_many :relations, 
@@ -29,7 +30,32 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :user_name
   
   def comments_around_chapter(book, chapter)
-    self.relationships.content_stream(self, book, chapter)
+    comments_data = self.relationships.content_stream(self, book, chapter).to_a
+    parser = ::XmlParser.new
+
+    temp_hash = Hash.new
+    bible_hash = Hash.new
+ 
+    comments_data.each_with_index do |z, index|
+      temp_hash['book_start'] = z[:book_start]
+      temp_hash['chapters'] = z[:chapters]
+      temp_hash['verse_start'] = z[:verse_start]
+      temp_hash['verse_end'] = z[:verse_end]
+      temp_hash['user_id'] = z[:user_id]
+      temp_hash['user_name'] = z[:user_name]
+      temp_hash['full_name'] = z[:full_name]
+      temp_hash['description'] = z[:description]
+      temp_hash['created_at'] = z[:created_at]
+      
+      bible_hash['book'] = temp_hash['book_start']
+      bible_hash['chapter'] = temp_hash['chapters']
+      bible_hash['verse_start'] = temp_hash['verse_start']
+      bible_hash['verse_end'] = temp_hash['verse_end']
+      bible_hash['bible_version'] = 'asv.xml'
+      temp_hash['verses'] = parser.parse_chapters_and_verses(bible_hash)
+
+      comments_data[index] = temp_hash
+    end
   end
 
   def most_recent_content_stream
