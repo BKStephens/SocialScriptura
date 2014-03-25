@@ -17,7 +17,7 @@ class RelationshipsController < ApplicationController
 
 
   def content_stream
-      @content_stream = current_user.most_recent_content_stream
+      @content_stream = current_user.most_recent_content_stream.to_json
   end
   
   def create
@@ -45,6 +45,7 @@ class RelationshipsController < ApplicationController
 
   def destroy
     Relationship.destroy(user = current_user.id, friend = params[:friend_id])
+    
     respond_to do |format|
       format.html { redirect_to relationships_url }
       format.json { head :no_content }

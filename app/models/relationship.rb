@@ -42,11 +42,15 @@ class Relationship < ActiveRecord::Base
     user_ids << user[:id].to_i
     
     comments = User.all_comments
+    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description')
+    .joins('INNER JOIN users ON comments.user_id = users.id')
+    .joins('INNER JOIN bible_chapters ON comments.chapter_start = bible_chapters.id')
     .where(
       :user_id => user_ids,
       :book_start => book,
-      :chapter_start => (chapters_hash['chapter_before_floor']..chapters_hash['chapter_after_ceiling'])
-    ).order('created_at DESC').to_a
+      'bible_chapters.chapters' => (chapters_hash['chapter_before_floor']..chapters_hash['chapter_after_ceiling'])
+    )
+    .order('comments.created_at DESC').to_a
   end
 
   def self.most_recent_content_stream(user)
@@ -54,9 +58,13 @@ class Relationship < ActiveRecord::Base
     user_ids << user[:id].to_i
     
     comments = User.all_comments
+    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description')
+    .joins('INNER JOIN users ON comments.user_id = users.id')
+    .joins('INNER JOIN bible_chapters ON comments.chapter_start = bible_chapters.id')
     .where(
       :user_id => user_ids
-    ).order('created_at DESC').to_a
+    )
+    .order('comments.created_at DESC').to_a
   end
 
   private

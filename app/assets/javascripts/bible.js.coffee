@@ -32,6 +32,19 @@ $(document).ready ->
       error: ->
         alert "This junk errored out son"
 
+  `function tree(data) {    
+      if (typeof(data) == 'object') {        
+          var ul = $('<ul>');
+          for (var i in data) {            
+              ul.append($('<li>').text(i).append(tree(data[i])));         
+          }        
+          return ul;
+      } else {       
+          var textNode = document.createTextNode(' => ' + data);
+          return textNode;
+      }
+    }`
+
   $('article#Bible').find('form').submit (event) ->
     event.stopPropagation()
     event.preventDefault()
@@ -46,6 +59,8 @@ $(document).ready ->
         $("#BibleOutput").text(json.bible_content);
         $("#ContentStream").empty();
         $("#ContentStream").text(json.content_stream);
+        $(document.body).append(tree(JSON.parse(json.content_stream)));
+    
       error: ->
         alert "This junk errored out son"
 
