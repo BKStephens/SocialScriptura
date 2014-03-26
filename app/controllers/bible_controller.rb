@@ -6,7 +6,6 @@ class BibleController < ApplicationController
     @users_bible_view ||= BibleView.new
     xml_parser(@users_bible_view)
     comment_section
-    content_stream
   end
   
   def xml_parser(bible_params)  

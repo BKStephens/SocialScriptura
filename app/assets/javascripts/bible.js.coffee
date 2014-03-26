@@ -1,5 +1,12 @@
 $(document).ready ->
   chapters = $('#bible_view_chapter').html()
+  
+  #setting up loading spinner's positio
+  content_stream_position = $('#ContentStream').position();
+  spinner_vertical = content_stream_position.top + 80;
+  spinner_horizontal = content_stream_position.left + ($('#ContentStream').width()/3);
+  `$("#floatingCirclesG").css({"top": spinner_vertical, "left":spinner_horizontal})`
+  
   $('#bible_view_book').change ->
     #Filter the Bible Chapters
     book = $('#bible_view_book :selected').text()
@@ -8,6 +15,10 @@ $(document).ready ->
       $('#bible_view_chapter').html(options)
     #Change the bible book in the comments section
     $('#comment_book_start').val(book).change();
+
+  $('#bible_view_chapter').change ->
+    chapter = $('#bible_view_chapter :selected').val()
+    $('#comment_chapter_start').val(chapter).change();
 
   $('#comment_book_start').change ->
     book = $('#comment_book_start :selected').text()
@@ -54,12 +65,15 @@ $(document).ready ->
       url: $(this).attr('action')
       data: $('article#Bible').find('form').serialize()
       dataType: 'json'
+      beforeSend: -> 
+        $("#ContentStream").empty();
+        $("#spinner").show();
+      complete: ->
+        $("#spinner").hide();
       success: (json) ->     
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
-        $("#ContentStream").empty();
-        $("#ContentStream").text(json.content_stream);
-        $(document.body).append(tree(JSON.parse(json.content_stream)));
+        $("#ContentStream").append(tree(JSON.parse(json.content_stream)));
     
       error: ->
         alert "This junk errored out son"
@@ -78,3 +92,6 @@ $(document).ready ->
       error: ->
         alert "This junk errored out son"
 
+  `$(function () {
+    $('#new_bible_view').submit();
+  })`
