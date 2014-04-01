@@ -33,29 +33,27 @@ class User < ActiveRecord::Base
     comments_data = self.relationships.content_stream(self, book, chapter).to_a
     parser = ::XmlParser.new
 
-    temp_hash = Hash.new
-    bible_hash = Hash.new
- 
-    comments_data.each_with_index do |z, index|
-      temp_hash['book_start'] = z[:book_start]
-      temp_hash['chapters'] = z[:chapters]
-      temp_hash['verse_start'] = z[:verse_start]
-      temp_hash['verse_end'] = z[:verse_end]
-      temp_hash['user_id'] = z[:user_id]
-      temp_hash['user_name'] = z[:user_name]
-      temp_hash['full_name'] = z[:full_name]
-      temp_hash['description'] = z[:description]
-      temp_hash['created_at'] = z[:created_at]
-      
-      bible_hash['book'] = temp_hash['book_start']
-      bible_hash['chapter'] = temp_hash['chapters']
-      bible_hash['verse_start'] = temp_hash['verse_start']
-      bible_hash['verse_end'] = temp_hash['verse_end']
-      bible_hash['bible_version'] = 'asv.xml'
-      temp_hash['verses'] = parser.parse_chapters_and_verses(bible_hash)
-
-      comments_data[index] = temp_hash
+    single_comment_json = comments_data.map do |z|
+      { :book_start => z.book_start,
+        :chapters => z.chapters,
+        :verse_start => z.verse_start,
+        :verse_end => z.verse_end,
+        :user_id => z.user_id,
+        :user_name => z.user_name,
+        :full_name => z.full_name,
+        :description => z.description,
+        :created_at => z.created_at,
+        :verses => parser.parse_chapters_and_verses(
+          'book' => z.book_start, 
+          'chapter' => z.chapters, 
+          'verse_start' => z.verse_start, 
+          'verse_end' => z.verse_end, 
+          'bible_version' => 'asv.xml' 
+        )
+      }
     end
+    
+    comments_json = { :comments => single_comment_json }
   end
 
   def most_recent_content_stream

@@ -15,6 +15,7 @@
 //= require foundation
 //= require jquery.turbolinks
 //= require turbolinks
+//= require mustache
 //= require_tree .
 //= require modernizr
 

@@ -43,19 +43,22 @@ $(document).ready ->
       error: ->
         alert "This junk errored out son"
 
-  `function tree(data) {    
-      if (typeof(data) == 'object') {        
-          var ul = $('<ul>');
-          for (var i in data) {            
-              ul.append($('<li>').text(i).append(tree(data[i])));         
-          }        
-          return ul;
-      } else {       
-          var textNode = document.createTextNode(' => ' + data);
-          return textNode;
-      }
-    }`
 
+  `function tree(data) {  
+     var div = $('<div>');
+      
+     '{{#comments}}'
+     var panel = [
+     '<div id="comment">',
+       '{{description}}',
+     '</div>'
+     ].join('\n');
+    '{{/comments}}' 
+      
+     div.append(Mustache.render(panel, data));
+     $('#ContentStream').append(div.html());
+   }`
+  
   $('article#Bible').find('form').submit (event) ->
     event.stopPropagation()
     event.preventDefault()
@@ -71,9 +74,10 @@ $(document).ready ->
       complete: ->
         $("#spinner").hide();
       success: (json) ->     
+        console.log(JSON.parse(json.content_stream));
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
-        $("#ContentStream").append(tree(JSON.parse(json.content_stream)));
+        $("#ContentStream").append(tree(json.content_stream));
     
       error: ->
         alert "This junk errored out son"
