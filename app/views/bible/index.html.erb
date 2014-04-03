@@ -1,5 +1,14 @@
 <head>
-  
+	<script id="contentStreamTemplate" type="text/template">
+	    <div class="comment">
+	    {{#comments}}
+	       <p>{{full_name}}</p> </br>
+	       <p>{{created_at}} {{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}</p> </br>
+	       <div class='comment_verses'>{{verses}}</div> </br>
+	       <div class='comment_body'>{{description}}</div> </br>
+	    {{/comments}}
+	    </div>
+	</script>  
 </head>
 <body>
 <section>

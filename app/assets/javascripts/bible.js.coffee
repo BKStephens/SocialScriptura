@@ -43,22 +43,10 @@ $(document).ready ->
       error: ->
         alert "This junk errored out son"
 
-
   `function tree(data) {  
      var div = $('<div>');
-       
-     var panel = 
-     "{{#comments}} <div class='comment'>"
-       +"{{full_name}}"
-       +"</br>"
-       +"{{created_at}} {{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}"
-       +"</br>"
-       +"<div class='comment_verses'>{{verses}}</div>"
-       +"</br>"
-       +"<div class='comment'>{{description}}</div>"
-       +"</br>"
-     +"</div>{{/comments}}";
-     
+     panel = $("#contentStreamTemplate").html();
+
      var div = Mustache.to_html(panel, data)
      $('#ContentStream').append(div);
    }`
