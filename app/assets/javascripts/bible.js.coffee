@@ -46,17 +46,21 @@ $(document).ready ->
 
   `function tree(data) {  
      var div = $('<div>');
-      
-     '{{#comments}}'
-     var panel = [
-     '<div id="comment">',
-       '{{description}}',
-     '</div>'
-     ].join('\n');
-    '{{/comments}}' 
-      
-     div.append(Mustache.render(panel, data));
-     $('#ContentStream').append(div.html());
+       
+     var panel = 
+     "{{#comments}} <div class='comment'>"
+       +"{{full_name}}"
+       +"</br>"
+       +"{{created_at}} {{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}"
+       +"</br>"
+       +"<div class='comment_verses'>{{verses}}</div>"
+       +"</br>"
+       +"<div class='comment'>{{description}}</div>"
+       +"</br>"
+     +"</div>{{/comments}}";
+     
+     var div = Mustache.to_html(panel, data)
+     $('#ContentStream').append(div);
    }`
   
   $('article#Bible').find('form').submit (event) ->
@@ -77,7 +81,7 @@ $(document).ready ->
         console.log(JSON.parse(json.content_stream));
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
-        $("#ContentStream").append(tree(json.content_stream));
+        $("#ContentStream").append(tree(JSON.parse(json.content_stream)));
     
       error: ->
         alert "This junk errored out son"
