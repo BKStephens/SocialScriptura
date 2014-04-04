@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
         :user_name => z.user_name,
         :full_name => z.full_name,
         :description => z.description,
-        :created_at => z.created_at,
+        :created_at => z.created_at.strftime("%m-%d-%Y at %H:%M:%S %p"),
         :verses => parser.parse_chapters_and_verses(
           'book' => z.book_start, 
           'chapter' => z.chapters, 

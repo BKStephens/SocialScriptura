@@ -1,11 +1,13 @@
 <head>
 	<script id="contentStreamTemplate" type="text/template">
-	    <div class="comment">
+	    <div class="stream">
 	    {{#comments}}
+	    <div class="comment">
 	       <p>{{full_name}}</p> </br>
 	       <p>{{created_at}} {{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}</p> </br>
 	       <div class='comment_verses'>{{verses}}</div> </br>
 	       <div class='comment_body'>{{description}}</div> </br>
+	     </div>
 	    {{/comments}}
 	    </div>
 	</script>  
