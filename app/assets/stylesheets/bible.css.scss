@@ -11,13 +11,11 @@ div .comment {
   border-color: #cccccc;
   border-width: .1rem;
   
-  top: 20px;
-  margin-top: 10px;
-  margin-bottom: 10 px;	
-  padding: .3rem .3rem .3rem .3rem;
+  margin-top: .7rem;
+  padding: 0 .3rem 0 .3rem;
 }
 
-div .comment_verses{
+div .comment_verses {
   // #E8E8E8
   // F5F5F5	
   background-color: #FFFFFF;
@@ -29,5 +27,18 @@ div .comment_verses{
 
   height:10rem;
   overflow:scroll;
+}
+
+.created_at {
+  color: #898f9c;
+  font-size: .6rem;
+}
+
+div .comment_chapter_verse {
+  float:right;
+}
+
+.comment_description textarea {
+  height: 10rem;
 }
 

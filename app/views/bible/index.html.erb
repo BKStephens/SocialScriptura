@@ -1,15 +1,16 @@
 <head>
 	<script id="contentStreamTemplate" type="text/template">
-	    <div class="stream">
+	  <div class="stream">
 	    {{#comments}}
 	    <div class="comment">
-	       <p>{{full_name}}</p> </br>
-	       <p>{{created_at}} {{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}</p> </br>
+	       <span>{{full_name}}</span> </br>
+	       <span class='created_at'>{{created_at}}</span>
+	       <div class='comment_chapter_verse'>{{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}</div>
 	       <div class='comment_verses'>{{verses}}</div> </br>
-	       <div class='comment_body'>{{description}}</div> </br>
+	       <div class='comment_body'>{{description}}</div>
 	     </div>
 	    {{/comments}}
-	    </div>
+	  </div>
 	</script>  
 </head>
 <body>
@@ -26,11 +27,13 @@
 	</article>
 	<article id = "Comment" class = "large-4 columns">
 	  <%= form_for @bible_comment, :remote=>true do |c| %>
-	    <%= c.collection_select(:book_start, BibleBooks.all, :book, :book) %>
+		<%= c.collection_select(:book_start, BibleBooks.all, :book, :book) %>	    
 	    <%= c.select(:chapter_start, grouped_options_for_select(BibleChapters.for_select)) %>
-	    <%= c.collection_select(:verse_start, BibleVerse.default_verses, :bible_verse, :bible_verse) %>
-	    <%= c.collection_select(:verse_end, BibleVerse.default_verses, :bible_verse, :bible_verse, { :selected => BibleVerse.default_verses.last[:bible_verse] }) %>
-	    <%= c.text_area :description %>
+	    <%= c.label 'Verse start:' %>
+		<%= c.collection_select(:verse_start, BibleVerse.default_verses, :bible_verse, :bible_verse) %>
+	    <%= c.label 'Verse end:' %>
+		<%= c.collection_select(:verse_end, BibleVerse.default_verses, :bible_verse, :bible_verse, { :selected => BibleVerse.default_verses.last[:bible_verse] }) %>
+	    <span class="comment_description"><%= c.text_area :description %></span>
 	    <%= c.hidden_field :user_id, :value => current_user.id %>
 	    <%= c.submit "Comment" %>
 	  <% end %>
