@@ -1,3 +1,44 @@
 // Place all the styles related to the relationships controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url("spinner.css.scss");
+
+div .comment {
+  background-color: #fafafa;
+  
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: .1rem;
+  
+  margin-top: .7rem;
+  padding: 0 .3rem 0 .3rem;
+}
+
+div .comment_verses {
+  // #E8E8E8
+  // F5F5F5	
+  background-color: #FFFFFF;
+  width:100%;
+
+  border-style: solid;
+  border-color: #cccccc;
+  border-width: .1rem;
+
+  height:10rem;
+  overflow:scroll;
+}
+
+.created_at {
+  color: #898f9c;
+  font-size: .6rem;
+}
+
+div .comment_chapter_verse {
+  float:right;
+}
+
+.comment_description textarea {
+  height: 10remai;
+}
+

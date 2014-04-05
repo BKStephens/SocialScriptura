@@ -1,4 +1,17 @@
 <head>
+  <script id="contentStreamTemplate" type="text/template">
+    <div class="stream">
+      {{#comments}}
+      <div class="comment">
+         <span>{{full_name}}</span> </br>
+         <span class='created_at'>{{created_at}}</span>
+         <div class='comment_chapter_verse'>{{book_start}} {{chapters}}:{{verse_start}}-{{verse_end}}</div>
+         <div class='comment_verses'>{{verses}}</div> </br>
+         <div class='comment_body'>{{description}}</div>
+       </div>
+      {{/comments}}
+    </div>
+  </script>  
 </head>
 <body>
   <section>
@@ -21,8 +34,28 @@
     </article>
 
     <article id = "ContentStream" class = "large-6 columns">
-      <div><%=@content_stream.to_s %></div>
+      <!-- <div><%=@content_stream.to_s %></div> -->
     </article>
+    <article id='spinner'>
+    <div id="floatingCirclesG">
+    <div class="f_circleG" id="frotateG_01">
+    </div>
+    <div class="f_circleG" id="frotateG_02">
+    </div>
+    <div class="f_circleG" id="frotateG_03">
+    </div>
+    <div class="f_circleG" id="frotateG_04">
+    </div>
+    <div class="f_circleG" id="frotateG_05">
+    </div>
+    <div class="f_circleG" id="frotateG_06">
+    </div>
+    <div class="f_circleG" id="frotateG_07">
+    </div>
+    <div class="f_circleG" id="frotateG_08">
+    </div>
+    </div>
+  </article>
   </article>
   </section>
 </body>

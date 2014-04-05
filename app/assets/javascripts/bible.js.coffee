@@ -1,7 +1,13 @@
 $(document).ready ->
   chapters = $('#bible_view_chapter').html()
   
-  #setting up loading spinner's positio
+  tree = (data) ->
+    panel = $("#contentStreamTemplate").html()
+    div = `Mustache.to_html(panel, data)`
+    $('#ContentStream').append(div)
+    console.log(data)
+
+  #setting up loading spinner's position
   content_stream_position = $('#ContentStream').position();
   spinner_vertical = content_stream_position.top + 80;
   spinner_horizontal = content_stream_position.left + ($('#ContentStream').width()/3);
@@ -41,16 +47,8 @@ $(document).ready ->
          .append("<option value=\"#{option}\">#{option}</option>" for option in json)
          $("#comment_verse_end").val(Math.max.apply(Math, json)).change();
       error: ->
-        alert "This junk errored out son"
+        console.log('Error with comment_chapter_start javascript')
 
-  `function tree(data) {  
-     var div = $('<div>');
-     panel = $("#contentStreamTemplate").html();
-
-     var div = Mustache.to_html(panel, data)
-     $('#ContentStream').append(div);
-   }`
-  
   $('article#Bible').find('form').submit (event) ->
     event.stopPropagation()
     event.preventDefault()
@@ -66,13 +64,12 @@ $(document).ready ->
       complete: ->
         $("#spinner").hide();
       success: (json) ->     
-        console.log(JSON.parse(json.content_stream));
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
         $("#ContentStream").append(tree(JSON.parse(json.content_stream)));
     
       error: ->
-        alert "This junk errored out son"
+        console.log('Error with submit bible form javascript')
 
   $('article#Comment').find('form').submit (event) ->
     event.stopPropagation()
@@ -86,7 +83,7 @@ $(document).ready ->
       success: (json) ->     
         $("#comment_description").val("");
       error: ->
-        alert "This junk errored out son"
+        console.log('Error with submit comment form javascript')
 
   `$(function () {
     $('#new_bible_view').submit();
