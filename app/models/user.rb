@@ -28,9 +28,18 @@ class User < ActiveRecord::Base
 
   validates_presence_of :user_name
   validates_uniqueness_of :user_name
-  
+
   def comments_around_chapter(book, chapter)
     comments_data = self.relationships.content_stream(self, book, chapter).to_a
+    add_bible_verses_to_comments(comments_data)
+  end
+
+  def most_recent_content_stream
+    comments_data = self.relationships.most_recent_content_stream(self).to_a
+    add_bible_verses_to_comments(comments_data)
+  end
+
+  def add_bible_verses_to_comments(comments_data)
     parser = ::XmlParser.new
 
     single_comment_json = comments_data.map do |z|
@@ -54,10 +63,6 @@ class User < ActiveRecord::Base
     end
     
     comments_json = { :comments => single_comment_json }
-  end
-
-  def most_recent_content_stream
-    self.relationships.most_recent_content_stream(self)
   end
 
   def self.comments

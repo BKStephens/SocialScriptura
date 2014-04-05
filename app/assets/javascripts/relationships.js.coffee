@@ -2,14 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).ready ->
-  tree2 = (data) ->
+  mustacheContentStreamBuilder = (data) ->
     panel = $("#contentStreamTemplate").html()
-    div = `Mustache.to_html(panel, data)`
+    div = `Mustache.to_html(panel, JSON.parse(data))`
     $('#ContentStream').append(div)
-    console.log(panel)
-    console.log(data)
-    console.log(div)
-
+    
   content_stream_position = $('#ContentStream').position();
   spinner_vertical = content_stream_position.top + 80;
   spinner_horizontal = content_stream_position.left + ($('#ContentStream').width()/3);
@@ -25,4 +22,4 @@ $(document).ready ->
       complete: ->
         $("#spinner").hide();
       success: (json) ->     
-        $("#ContentStream").append(tree2(JSON.parse(json.content_stream)));
+        $("#ContentStream").append(mustacheContentStreamBuilder(json.content_stream));

@@ -1,12 +1,11 @@
 $(document).ready ->
   chapters = $('#bible_view_chapter').html()
   
-  tree = (data) ->
+  mustacheContentStreamBuilder = (data) ->
     panel = $("#contentStreamTemplate").html()
-    div = `Mustache.to_html(panel, data)`
+    div = `Mustache.to_html(panel, JSON.parse(data))`
     $('#ContentStream').append(div)
-    console.log(data)
-
+    
   #setting up loading spinner's position
   content_stream_position = $('#ContentStream').position();
   spinner_vertical = content_stream_position.top + 80;
@@ -66,7 +65,7 @@ $(document).ready ->
       success: (json) ->     
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
-        $("#ContentStream").append(tree(JSON.parse(json.content_stream)));
+        $("#ContentStream").append(mustacheContentStreamBuilder(json.content_stream));
     
       error: ->
         console.log('Error with submit bible form javascript')
@@ -85,6 +84,4 @@ $(document).ready ->
       error: ->
         console.log('Error with submit comment form javascript')
 
-  `$(function () {
-    $('#new_bible_view').submit();
-  })`
+  $('#new_bible_view').submit();
