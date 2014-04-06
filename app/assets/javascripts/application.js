@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require foundation
 //= require jquery.turbolinks
 //= require turbolinks
@@ -19,3 +20,14 @@
 //= require modernizr
 
 window.onload = (function(){ $(document).foundation(); });
+
+// $("#search").tokenInput("/search.json");
+$(function() {
+  $('#search').tokenInput('/search.json', { 
+  	crossDomain: false, 
+  	theme: "custom",
+  	preventDuplicates: true,
+  	resultsLimit: 50,
+    minChars: 3
+  });
+});
