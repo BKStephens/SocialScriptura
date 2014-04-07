@@ -87,10 +87,6 @@ GEM
     multi_json (1.9.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mustache (0.99.5)
-    mustache-rails (0.2.3)
-      actionpack (>= 3.1)
-      mustache (~> 0.99.4)
     oauth (0.4.7)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
@@ -186,7 +182,6 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   libxml-ruby
-  mustache-rails
   omniauth-facebook
   omniauth-twitter
   pg
