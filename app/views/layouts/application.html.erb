@@ -30,9 +30,8 @@
           <ul class="left">
             <li class="divider"></li>
             <li class="has-form">
-              <%= form_tag({:controller => :search, :action => :index}, :method => 'get') do %>
+              <%= form_tag('/search', :method => 'get') do %>
                 <div class="row collapse">
-                  <!-- url_for(:controller => 'search', :action => 'index') -->
                   <div class="small-10 columns">
                     <%= text_field_tag "term", nil, class:"search", id: "search", placeholder: "Find Users and Bible Passages" %>
                   </div>

@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery.ui.all
 //= require jquery_ujs
-//= require jquery.tokeninput
 //= require foundation
 //= require jquery.turbolinks
 //= require turbolinks
