@@ -75,7 +75,9 @@ class User < ActiveRecord::Base
 
   def self.search(name)
     if name
-      where('full_name ILIKE ?', "%#{name}%")
+      names = name.split(" ")
+      #I need to refactor this to use full text searching with an index that also works with partial names. Ex. Ben for Benjamin.
+      where('full_name ILIKE ? AND full_name ILIKE ? AND full_name ILIKE ? AND full_name ILIKE ?', "%#{names[0]}%", "%#{names[1]}%", "%#{names[2]}%", "%#{names[3]}%")
     else
       scoped
     end
