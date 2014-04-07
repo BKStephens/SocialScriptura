@@ -10,7 +10,7 @@
   <%= f.email_field :email %></div>
 
   <div><%= f.label :user_name %><br />
-  <%= f.text_field :user_name %></div>
+  <%= f.text_field :user_name, :readonly => true %></div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
