@@ -73,6 +73,14 @@ class User < ActiveRecord::Base
     Comment.all
   end
 
+  def self.search(name)
+    if name
+      where('full_name ILIKE ?', "%#{name}%")
+    else
+      scoped
+    end
+  end
+
   def self.from_omniauth(auth)
   	where(auth.slice(:provider, :uid)).first_or_create do |user|
       user.provider = auth.provider

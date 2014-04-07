@@ -73,6 +73,8 @@ GEM
     jquery-turbolinks (2.0.2)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (4.2.0)
+      railties (>= 3.2.16)
     json (1.8.1)
     jwt (0.1.11)
       multi_json (>= 1.5)
@@ -182,6 +184,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   libxml-ruby
   mustache-rails
   omniauth-facebook

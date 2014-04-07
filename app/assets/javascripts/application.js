@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require foundation
@@ -19,15 +20,19 @@
 //= require mustache
 //= require modernizr
 
-window.onload = (function(){ $(document).foundation(); });
+window.onload = (
+	function(){ 
+		$(document).foundation(); 
+	});
 
-// $("#search").tokenInput("/search.json");
-$(function() {
-  $('#search').tokenInput('/search.json', { 
-  	crossDomain: false, 
-  	theme: "custom",
-  	preventDuplicates: true,
-  	resultsLimit: 50,
-    minChars: 3
+$(document).ready(function() {
+  $(function() {
+    $("#search").autocomplete(
+    {
+      source:'/search.json',
+      select: function( event, ui ) {
+        $( "#search" ).val( ui.item.name );
+      }
+    })
   });
 });

@@ -2,11 +2,15 @@ class SearchController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-  	@users = User.all
-  	# @users = User.where('full_name LIKE ?', "%#{params[:q]}%")
+  	@users = User.search(params[:term])
+  	
   	respond_to do |format|
   	  format.html
-  	  format.json { render json: @users.where('full_name ILIKE ?', "%#{params[:q]}%").map { |n| {:id => n.id, :name => n.full_name } }}
+  	  format.json { 
+  	  	render json: @users.map { 
+  	  	  |u| {:id => u.id, :label => u.full_name} 
+  	    }
+  	  }
   	end
   end
 end
