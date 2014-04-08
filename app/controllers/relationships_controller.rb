@@ -1,6 +1,6 @@
 class RelationshipsController < ApplicationController
   before_filter :authenticate_user!
-  before_action :set_relationship, only: [:show, :edit, :update, :destroy]
+  before_action :set_relationship, only: [:show, :edit, :destroy]
 
   def index
     @user = current_user
