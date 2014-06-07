@@ -15,8 +15,8 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td><%= comment.bible_verse_start %></td>
-        <td><%= comment.bible_verse_end %></td>
+        <td><%= comment.verse_start %></td>
+        <td><%= comment.verse_end %></td>
         <td><%= comment.description %></td>
         <td><%= link_to 'Show', comment %></td>
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
