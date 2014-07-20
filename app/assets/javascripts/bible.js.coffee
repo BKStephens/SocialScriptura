@@ -51,7 +51,7 @@ $(document).ready ->
   $('article#Bible').find('form').submit (event) ->
     event.stopPropagation()
     event.preventDefault()
-    
+ 
     $.ajax
       type: 'POST'
       url: $(this).attr('action')
@@ -81,6 +81,7 @@ $(document).ready ->
       dataType: 'json'
       success: (json) ->     
         $("#comment_description").val("");
+        $('#new_bible_view').submit(); #TODO: refactor this to refresh comments without submit of other form
       error: ->
         console.log('Error with submit comment form javascript')
 

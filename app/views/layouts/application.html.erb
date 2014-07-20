@@ -12,8 +12,8 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   	<title><%= content_for?(:title) ? yield(:title) : "SocialScriptura" %></title>
-
-  	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true, :cache => true %>
+    <%= javascript_include_tag "application", params[:controller], "data-turbolinks-track" => true, :cache => true %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true, :cache => true %>
   	<%= csrf_meta_tags %>
   </head>
 
@@ -69,7 +69,5 @@
       <% end %>
       <section id="body" class="larger-12 columns"><%= yield %></section>
     </div>
-    
-    <%= javascript_include_tag "application", params[:controller], "data-turbolinks-track" => true, :cache => true %>
   </body>
 </html>
