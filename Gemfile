@@ -9,10 +9,10 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.0', '<=4.0.2'
 
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '>= 1.3.0', '<=2.4.0'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
@@ -21,11 +21,11 @@ gem 'coffee-rails', '~> 4.0.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 3.1.1'
 gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.2.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -47,14 +47,14 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'devise'
+gem 'devise', '~> 3.2.3'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'libxml-ruby'	
-gem 'puma'
+gem 'puma', '~> 2.8.1'
 gem 'jquery-turbolinks'
 gem 'acts-as-messageable'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.2.1.0'
 
  group :production, :staging do
       gem 'rails_12factor'
