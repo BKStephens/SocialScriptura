@@ -5,12 +5,6 @@ $(document).ready ->
     panel = $("#contentStreamTemplate").html()
     div = `Mustache.to_html(panel, JSON.parse(data))`
     $('#ContentStream').append(div)
-    
-  #setting up loading spinner's position
-  content_stream_position = $('#ContentStream').position();
-  spinner_vertical = content_stream_position.top + 80;
-  spinner_horizontal = content_stream_position.left + ($('#ContentStream').width()/3);
-  `$("#floatingCirclesG").css({"top": spinner_vertical, "left":spinner_horizontal})`
   
   $('#bible_view_book').change ->
     #Filter the Bible Chapters
