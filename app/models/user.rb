@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   has_many :pending_friends,
            :through => :relationships,
            :source => :friend,
-           :conditions => "status = 'requested'"
+           :conditions => proc { "status = 'requested'" }
   has_many :accepted_friends,
            :through => :relationships,
            :source => :friend,
-           :conditions => "status = 'accepted'"
+           :conditions => proc { "status = 'accepted'" }
   has_many :comments, dependent: :destroy
   has_one :bible_version, :class_name => 'BibleVersion'
 
