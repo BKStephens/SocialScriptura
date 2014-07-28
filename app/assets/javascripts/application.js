@@ -15,7 +15,7 @@
 //= require jquery-ui
 //= require jquery-ui/core
 //= require jquery.turbolinks
-//= require foundation/foundation
+//= require foundation
 //= require turbolinks
 //= require mustache
 //= require modernizr
