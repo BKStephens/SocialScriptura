@@ -3,11 +3,27 @@ class BibleController < ApplicationController
   require 'XmlParser'
 
   def index
-    @users_bible_view ||= BibleView.new
+    @users_bible_view = set_users_bible_view
     xml_parser(@users_bible_view)
     comment_section
   end
   
+  def set_users_bible_view
+    show
+    unless @users_bible_view.present? then new_user_bible_view end
+
+    return @users_bible_view
+  end
+
+  def show
+    @users_bible_view = UserBibleView.where(users_id: current_user.id).first
+  end
+
+  def new_user_bible_view
+    @users_bible_view = UserBibleView.new(users_id: current_user.id)
+    @users_bible_view.save
+  end
+
   def xml_parser(bible_params)  
   	parser = ::XmlParser.new
     @output = parser.parse_chapters(bible_params)
@@ -22,7 +38,10 @@ class BibleController < ApplicationController
   end
 
   def update_bible_view
-    @users_bible_view = BibleView.new(comment_params)
+    @users_bible_view = set_users_bible_view
+    @users_bible_view.set_attributes(comment_params)
+    @users_bible_view.save
+    
     xml_parser(@users_bible_view)
     content_stream
     
@@ -38,6 +57,6 @@ class BibleController < ApplicationController
   private
 
    def comment_params
-      params.require(:bible_view).permit(:bible_version, :chapter, :verse_from, :verse_to)
+      params.require(:user_bible_view).permit(:bible_version, :chapter, :verse_from, :verse_to)
     end
 end

@@ -1,25 +1,25 @@
 $(document).ready ->
-  chapters = $('#bible_view_chapter').html()
+  chapters = $('#user_bible_view_chapter').html()
   
   mustacheContentStreamBuilder = (data) ->
     panel = $("#contentStreamTemplate").html()
     div = `Mustache.to_html(panel, JSON.parse(data))`
     $('#ContentStream').append(div)
   
-  $('#bible_view_bible_version').change ->
+  $('#user_bible_view_bible_version').change ->
     $('article#Bible').find('form').submit();
 
-  $('#bible_view_book').change ->
+  $('#user_bible_view_book').change ->
     #Filter the Bible Chapters
-    book = $('#bible_view_book :selected').text()
+    book = $('#user_bible_view_book :selected').text()
     options = $(chapters).filter("optgroup[label='#{book}']").html()
     if options 
-      $('#bible_view_chapter').html(options)
+      $('#user_bible_view_chapter').html(options)
     #Change the bible book in the comments section
     $('#comment_book_start').val(book).change();
 
-  $('#bible_view_chapter').change ->
-    chapter = $('#bible_view_chapter :selected').val()
+  $('#user_bible_view_chapter').change ->
+    chapter = $('#user_bible_view_chapter :selected').val()
     $('#comment_chapter_start').val(chapter).change();
 
   $('#comment_book_start').change ->
@@ -56,6 +56,7 @@ $(document).ready ->
       data: $('article#Bible').find('form').serialize()
       dataType: 'json'
       beforeSend: -> 
+        console.log($('article#Bible').find('form').serialize());
         $("#ContentStream").empty();
         $("#spinner").show();
       complete: ->
@@ -79,11 +80,11 @@ $(document).ready ->
       dataType: 'json'
       success: (json) ->     
         $("#comment_description").val("");
-        $('#new_bible_view').submit(); #TODO: refactor this to refresh comments without submit of other form
+        $('.edit_user_bible_view').submit(); #TODO: refactor this to refresh comments without submit of other form
       error: ->
         console.log('Error with submit comment form javascript')
 
   $("#expand_comment_options").click ->
     $("#comment_options").slideToggle "slow"
 
-  $('#new_bible_view').submit();
+  $('.edit_user_bible_view').submit();

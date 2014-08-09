@@ -17,10 +17,11 @@
 <section>
 <article class ="row">
 	<article id = "Bible" class = "large-8 columns">
-	  <%= form_for @users_bible_view, :remote=>true do |v| %>
-	    <%= v.collection_select(:bible_version, BibleVersion.all, :file_name, :name) %>
-	    <%= v.collection_select(:book, BibleBooks.all, :book, :book) %>
-	    <%= v.select(:chapter, grouped_options_for_select(BibleChapters.for_select)) %>
+	  <%= form_for @users_bible_view, url: bible_views_path, json: { method: :post }, :remote=>true do |v| %>
+	     <%= v.collection_select(:bible_version, BibleVersion.all, :file_name, :name, {:selected => @users_bible_view.bible_version}) %>
+	    <%= v.collection_select(:book, BibleBooks.all, :book, :book, {:selected => @users_bible_view.book}) %>
+	    <%= v.select(:chapter, grouped_options_for_select(BibleChapters.for_select, :selected => @users_bible_view.chapter)) %> 
+	    <%= v.submit 'gdfs'%>
 	  <% end %>
 	  <div id = "BibleOutput"><%= @output %></div>
 	</article>
