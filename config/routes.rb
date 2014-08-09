@@ -1,7 +1,7 @@
 SocialScriptura::Application.routes.draw do
   root :to => 'welcome#index'
-  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
-
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", :registrations => "registrations"}
+  
   get 'comments/update_verses' => 'comments#update_verses'
   
   resources :welcome

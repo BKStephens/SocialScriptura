@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
   def user_params(params)
     params.permit(:user_name, :full_name, :denomination, :church, :email, :password, :password_confirmation, :current_password)
   end
+
+  def after_sign_in_path_for(resource)
+    bible_path
+  end
 end
