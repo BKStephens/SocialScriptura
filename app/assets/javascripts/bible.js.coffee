@@ -6,6 +6,9 @@ $(document).ready ->
     div = `Mustache.to_html(panel, JSON.parse(data))`
     $('#ContentStream').append(div)
   
+  $('#bible_view_bible_version').change ->
+    $('article#Bible').find('form').submit();
+
   $('#bible_view_book').change ->
     #Filter the Bible Chapters
     book = $('#bible_view_book :selected').text()
@@ -39,6 +42,7 @@ $(document).ready ->
          .empty()
          .append("<option value=\"#{option}\">#{option}</option>" for option in json)
          $("#comment_verse_end").val(Math.max.apply(Math, json)).change();
+         $('article#Bible').find('form').submit();         
       error: ->
         console.log('Error with comment_chapter_start javascript')
 
@@ -78,5 +82,8 @@ $(document).ready ->
         $('#new_bible_view').submit(); #TODO: refactor this to refresh comments without submit of other form
       error: ->
         console.log('Error with submit comment form javascript')
+
+  $("#expand_comment_options").click ->
+    $("#comment_options").slideToggle "slow"
 
   $('#new_bible_view').submit();

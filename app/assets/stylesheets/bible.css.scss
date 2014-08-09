@@ -16,8 +16,6 @@ div .comment {
 }
 
 div .comment_verses {
-  // #E8E8E8
-  // F5F5F5	
   background-color: #FFFFFF;
   width:100%;
 
@@ -42,3 +40,32 @@ div .comment_chapter_verse {
   height: 10rem;
 }
 
+.verse_selector {
+  float:left;
+  width: 44%;
+  padding: 2px;
+}
+
+.hidden_comment_options {
+  display: none;
+}
+
+#expand_comment_options {
+   float:left;
+   position: relative;
+   top: 22px;
+   left: 2px;
+}
+
+.fa-caret-square-o-up {
+  color: #de2a2a;
+}
+
+#red_button {
+  background-color: #de2a2a;
+  margin-bottom: 5px;
+
+  &:hover {
+    background-color: darken(#de2a2a, 10%)
+  }
+}

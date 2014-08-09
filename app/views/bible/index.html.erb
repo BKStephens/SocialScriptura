@@ -21,21 +21,29 @@
 	    <%= v.collection_select(:bible_version, BibleVersion.all, :file_name, :name) %>
 	    <%= v.collection_select(:book, BibleBooks.all, :book, :book) %>
 	    <%= v.select(:chapter, grouped_options_for_select(BibleChapters.for_select)) %>
-	    <%= v.submit "Go" %>
 	  <% end %>
 	  <div id = "BibleOutput"><%= @output %></div>
 	</article>
 	<article id = "Comment" class = "large-4 columns">
 	  <%= form_for @bible_comment, :remote=>true do |c| %>
-		<%= c.collection_select(:book_start, BibleBooks.all, :book, :book) %>	    
-	    <%= c.select(:chapter_start, grouped_options_for_select(BibleChapters.for_select)) %>
-	    <%= c.label 'Verse start:' %>
-		<%= c.collection_select(:verse_start, BibleVerse.default_verses, :bible_verse, :bible_verse) %>
-	    <%= c.label 'Verse end:' %>
-		<%= c.collection_select(:verse_end, BibleVerse.default_verses, :bible_verse, :bible_verse, { :selected => BibleVerse.default_verses.last[:bible_verse] }) %>
+		<div id = "comment_options" class = "hidden_comment_options">
+		  <%= c.label 'Book:' %>
+		  <%= c.collection_select(:book_start, BibleBooks.all, :book, :book) %>	    
+	      <%= c.label 'Chapter:' %>
+	      <%= c.select(:chapter_start, grouped_options_for_select(BibleChapters.for_select)) %>
+	    </div>
+	    <div class = "verse_selector">
+	      <%= c.label 'Verse from:' %>
+		  <%= c.collection_select(:verse_start, BibleVerse.default_verses, :bible_verse, :bible_verse) %>
+	    </div>
+	    <div class = "verse_selector">
+	      <%= c.label 'Verse to:' %>
+		  <%= c.collection_select(:verse_end, BibleVerse.default_verses, :bible_verse, :bible_verse, { :selected => BibleVerse.default_verses.last[:bible_verse] }) %>
+	    </div>
+		<div id="expand_comment_options"><i class="fa fa-caret-square-o-up fa-3x"></i></div>
 	    <span class="comment_description"><%= c.text_area :description %></span>
 	    <%= c.hidden_field :user_id, :value => current_user.id %>
-	    <%= c.submit "Comment" %>
+	    <%= c.submit "Comment", :class => 'button expand', :id => 'red_button' %>
 	  <% end %>
 	</article>
 	<article id = "ContentStream" class = "large-4 columns">

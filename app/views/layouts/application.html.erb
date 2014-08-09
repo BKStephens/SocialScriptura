@@ -36,7 +36,7 @@
                     <%= text_field_tag "term", nil, class:"search", id: "search", placeholder: "Find Users" %>
                   </div>
                   <div class="small-2 columns">
-                    <%= submit_tag "Search", id: "search_button", class: "alert button" %>
+                    <%= submit_tag "Search", id: "search_button", class: "button" %>
                   </div>
                 </div>
               <% end %>
@@ -44,29 +44,26 @@
           </ul>
           <ul class="right">
             <li class="divider"></li>
-            <li><%= link_to "Community", relationships_path %></li>
+            <li><%= link_to "Community", relationships_path, :id => 'community' %></li>
             <li class="divider"></li>
-            <li><%= link_to "Read & Comment", bible_path %></li>
+            <li><%= link_to "Read & Comment", bible_path, :id => 'read_and_comment' %></li>
             <li class="divider"></li>
             <!-- <li><a href="/messages">Message</a></li> 
             <li class="divider"></li> -->
             <% if user_signed_in? %>
-              <li><%= link_to current_user.user_name, edit_user_registration_path %></li>
+              <li><%= link_to current_user.user_name, edit_user_registration_path, :id => 'current_user' %></li>
               <li class="divider"></li>                          
-              <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :id => 'logout' %></li>
             <% else %>            
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path, :id => 'sign_up' %></li>
               <li class="divider"></li>  
-              <li><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Login", new_user_session_path, :id => 'login' %></li>
             <% end %>
           </ul>
         </section>
       </nav>
     </nav>
     <div class="row">
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <% end %>
       <section id="body" class="larger-12 columns"><%= yield %></section>
     </div>
   </body>

@@ -57,6 +57,7 @@ gem 'jquery-turbolinks'
 gem 'acts-as-messageable'
 gem 'foundation-rails', '~> 5.2.1.0'
 gem 'capybara'
+gem 'font-awesome-rails'
 
 group :test, :development do
   gem "factory_girl_rails"

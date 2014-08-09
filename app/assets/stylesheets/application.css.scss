@@ -14,4 +14,18 @@
  *= require jquery-ui/core
  *= require jquery-ui/autocomplete
  *= require foundation_and_overrides
+ *= require font-awesome
  */
+
+ #search_button {
+  background-color: #de2a2a;
+  
+  &:hover {
+    background-color: darken(#de2a2a, 10%)
+  }
+ }
+
+ #community:hover, #read_and_comment:hover, #current_user:hover, #logout:hover, #sign_up:hover, #login:hover {
+   background: darken(#de2a2a, 10%)
+ }
+
