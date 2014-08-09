@@ -17,8 +17,8 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should create comment" do
-    assert_difference('Comment.count') do
-      post :create, comment: { verse_end: @comment.verse_end, verse_start: @comment.verse_start, description: @comment.description }
+    assert_difference("Comment.count", +1) do
+      post :create, comment: { user_id: 1, book_start: "Genesis", chapter_start: @comment.chapter_start, verse_end: @comment.verse_end, verse_start: @comment.verse_start, description: @comment.description }
     end
 
     assert_redirected_to comment_path(assigns(:comment))
