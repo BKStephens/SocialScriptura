@@ -38,6 +38,7 @@ div .comment_chapter_verse {
 
 .comment_description textarea {
   height: 10rem;
+  float:left;
 }
 
 .verse_selector {
@@ -57,7 +58,7 @@ div .comment_chapter_verse {
    left: 2px;
 }
 
-.fa-caret-square-o-up {
+.fa-caret-square-o-up, .fa-caret-square-o-down {
   color: #de2a2a;
 }
 
@@ -68,4 +69,8 @@ div .comment_chapter_verse {
   &:hover {
     background-color: darken(#de2a2a, 10%)
   }
+}
+
+#Content, #ContentStream {
+  float: right;
 }

@@ -34,6 +34,9 @@ $(document).ready ->
       url: 'comments/update_verses'
       data: {comment: { chapter_start: $('select#comment_chapter_start').val() } }
       dataType: 'json'
+      beforeSend: ->
+        $("#comment_verse_end")
+         .empty()
       success: (json) ->     
          $("#comment_verse_start")
          .empty()
@@ -56,9 +59,6 @@ $(document).ready ->
       data: $('article#Bible').find('form').serialize()
       dataType: 'json'
       beforeSend: -> 
-        #console.log($('article#Bible').find('form').serialize());
-        console.log($(".edit_user_bible_view").find("select,textarea, input").serialize());
-        console.log($('article#Bible').find('form').find("select,textarea, input").serialize());
         $("#ContentStream").empty();
         $("#spinner").show();
       complete: ->
@@ -87,6 +87,24 @@ $(document).ready ->
         console.log('Error with submit comment form javascript')
 
   $("#expand_comment_options").click ->
+    $(this).find('i').toggleClass("fa-caret-square-o-down fa-caret-square-o-up");
     $("#comment_options").slideToggle "slow"
 
-  $('.edit_user_bible_view').submit();
+  convert_book_and_chapter_to_chapter_value_for_dropdown = ->
+    selected_chapter = $("#user_bible_view_chapter option:selected").val()
+    selected_book = $("#user_bible_view_book option:selected").text()
+    
+    chapter_record_id = undefined #this is necessary so that the variable set in the loop is not lost due to CoffeeScript's scoping
+    
+    $("#user_bible_view_chapter optgroup[label=\"#{selected_book}\"] option").each ->
+      chapter_record_id = $(this).val() if $(this).text() is selected_chapter
+    if typeof chapter_record_id isnt "undefined"
+      $("#comment_book_start").val selected_book
+      $("#comment_chapter_start option[value=\"#{chapter_record_id}\"]").attr("selected", "selected").text()
+      $("#comment_chapter_start").change()
+      $("#user_bible_view_chapter option[value=\"#{chapter_record_id}\"]").attr("selected", "selected").text()
+    else
+      $("#comment_book_start").val(selected_book).change()
+
+  $ ->
+    convert_book_and_chapter_to_chapter_value_for_dropdown()

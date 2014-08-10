@@ -21,7 +21,6 @@
 	    <%= v.collection_select(:bible_version, BibleVersion.all, :file_name, :name, {:selected => @users_bible_view.bible_version}) %>
 	    <%= v.collection_select(:book, BibleBooks.all, :book, :book, {:selected => @users_bible_view.book}) %>
 	    <%= v.select(:chapter, grouped_options_for_select(BibleChapters.for_select, :selected => @users_bible_view.chapter)) %> 
-	    <%= v.submit 'gdfs'%>
 	  <% end %>
 	  <div id = "BibleOutput"><%= @output %></div>
 	</article>
@@ -41,16 +40,18 @@
 	      <%= c.label 'Verse to:' %>
 		  <%= c.collection_select(:verse_end, BibleVerse.default_verses, :bible_verse, :bible_verse, { :selected => BibleVerse.default_verses.last[:bible_verse] }) %>
 	    </div>
-		<div id="expand_comment_options"><i class="fa fa-caret-square-o-up fa-3x"></i></div>
+		<div id="expand_comment_options"><i class="fa fa-caret-square-o-down fa-3x"></i></div>
 	    <span class="comment_description"><%= c.text_area :description %></span>
 	    <%= c.hidden_field :user_id, :value => current_user.id %>
 	    <%= c.submit "Comment", :class => 'button expand', :id => 'red_button' %>
 	  <% end %>
 	</article>
-	<article id = "ContentStream" class = "large-4 columns">
-	</article>
-	<article id="spinner">
-	  	<div class="large progress"><div>Loading…</div></div>
+	<article id="content">
+		<article id="ContentStream" class = "large-4 columns">
+		</article>
+		<article id="spinner">
+	  		<div class="large progress"><div>Loading…</div></div>
+		</article>
 	</article>
 </article>
 </section>
