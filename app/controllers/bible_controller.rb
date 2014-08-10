@@ -57,6 +57,6 @@ class BibleController < ApplicationController
   private
 
    def comment_params
-      params.require(:user_bible_view).permit(:bible_version, :chapter, :verse_from, :verse_to)
+      params.require(:user_bible_view).permit(:bible_version, :book, :chapter, :verse_from, :verse_to)
     end
 end

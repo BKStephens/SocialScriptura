@@ -56,7 +56,9 @@ $(document).ready ->
       data: $('article#Bible').find('form').serialize()
       dataType: 'json'
       beforeSend: -> 
-        console.log($('article#Bible').find('form').serialize());
+        #console.log($('article#Bible').find('form').serialize());
+        console.log($(".edit_user_bible_view").find("select,textarea, input").serialize());
+        console.log($('article#Bible').find('form').find("select,textarea, input").serialize());
         $("#ContentStream").empty();
         $("#spinner").show();
       complete: ->

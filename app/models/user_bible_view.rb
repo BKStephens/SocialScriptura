@@ -5,7 +5,7 @@ class UserBibleView < ActiveRecord::Base
   def set_attributes(params)
     temp_chapter = BibleChapters.where(:id => params[:chapter]).select("chapters, bible_books_id").first
     self.bible_version = params[:bible_version]
-    self.book = BibleBooks.where(:id => temp_chapter[:bible_books_id]).select("book").first[:book]
+    self.book = params[:book]
     self.chapter = temp_chapter[:chapters]
     self.verse_from = params[:verse_from]
     self.verse_to = params[:verse_to]
