@@ -60,6 +60,7 @@ $(document).ready ->
       dataType: 'json'
       beforeSend: -> 
         $("#ContentStream").empty();
+        $("#ContentStream").append('<article id="spinner"><div class="large progress"><div>Loading…</div></div></article>');
         $("#spinner").show();
       complete: ->
         $("#spinner").hide();
@@ -90,21 +91,8 @@ $(document).ready ->
     $(this).find('i').toggleClass("fa-caret-square-o-down fa-caret-square-o-up");
     $("#comment_options").slideToggle "slow"
 
-  convert_book_and_chapter_to_chapter_value_for_dropdown = ->
-    selected_chapter = $("#user_bible_view_chapter option:selected").val()
-    selected_book = $("#user_bible_view_book option:selected").text()
-    
-    chapter_record_id = undefined #this is necessary so that the variable set in the loop is not lost due to CoffeeScript's scoping
-    
-    $("#user_bible_view_chapter optgroup[label=\"#{selected_book}\"] option").each ->
-      chapter_record_id = $(this).val() if $(this).text() is selected_chapter
-    if typeof chapter_record_id isnt "undefined"
-      $("#comment_book_start").val selected_book
-      $("#comment_chapter_start option[value=\"#{chapter_record_id}\"]").attr("selected", "selected").text()
-      $("#comment_chapter_start").change()
-      $("#user_bible_view_chapter option[value=\"#{chapter_record_id}\"]").attr("selected", "selected").text()
-    else
-      $("#comment_book_start").val(selected_book).change()
-
+  set_verses_on_page_load = ->
+    $("#comment_chapter_start").change()
+      
   $ ->
-    convert_book_and_chapter_to_chapter_value_for_dropdown()
+    set_verses_on_page_load()

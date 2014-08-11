@@ -7,6 +7,7 @@ class UserBibleView < ActiveRecord::Base
     self.bible_version = params[:bible_version]
     self.book = params[:book]
     self.chapter = temp_chapter[:chapters]
+    self.chapter_dropdown_id = params[:chapter]
     self.verse_from = params[:verse_from]
     self.verse_to = params[:verse_to]
   end
@@ -18,5 +19,6 @@ class UserBibleView < ActiveRecord::Base
     self.bible_version ||= 'asv.xml'
     self.book ||= bible_book[:book]
     self.chapter ||= bible_chapter[:chapters]
+    self.chapter_dropdown_id ||= bible_chapter[:chapters]
   end
 end

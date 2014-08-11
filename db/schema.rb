@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140809174504) do
+ActiveRecord::Schema.define(version: 20140811002041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140809174504) do
     t.integer  "verse_to"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "chapter_dropdown_id"
   end
 
   add_index "user_bible_views", ["users_id"], name: "index_user_bible_views_on_users_id", using: :btree
