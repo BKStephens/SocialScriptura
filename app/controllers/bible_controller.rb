@@ -1,13 +1,18 @@
 class BibleController < ApplicationController
   before_filter :authenticate_user!
-  require 'XmlParser'
+  require 'xml_parser'
 
   def index
     @users_bible_view = set_users_bible_view
     xml_parser(@users_bible_view)
     comment_section
   end
-  
+
+  def bible_search_versions_list
+    @bible_search = ::BibleSearch.new
+    render json: @bible_search.versions_list, status: 200
+  end  
+
   def set_users_bible_view
     show
     unless @users_bible_view.present? then new_user_bible_view end

@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :comments_around_chapter, :most_recent_content_stream
-  require 'XmlParser'
+  require 'xml_parser'
 
   has_many :relationships
   has_many :relations, 
