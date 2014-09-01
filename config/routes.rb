@@ -15,8 +15,8 @@ SocialScriptura::Application.routes.draw do
 
   get 'bible' => 'bible#index'
   get 'bible_views' => 'bible#index'
-  patch 'bible_views' => 'bible#update_bible_view' 
-  post 'bible_views' => 'bible#update_bible_view'
+  patch 'bible_views' => 'bible#update' 
+  post 'bible_views' => 'bible#update'
   get 'bible_search_versions_list' => 'bible#bible_search_versions_list'
   get 'relationships_content_stream' => 'relationships#content_stream'
 end

@@ -40,7 +40,6 @@ class User < ActiveRecord::Base
   end
 
   def add_bible_verses_to_comments(comments_data)
-    parser = ::XmlParser.new
 
     single_comment_json = comments_data.map do |z|
       { :book_start => z.book_start,
@@ -52,7 +51,7 @@ class User < ActiveRecord::Base
         :full_name => z.full_name,
         :description => z.description,
         :created_at => z.created_at.strftime("%m-%d-%Y at %H:%M:%S %p"),
-        :verses => parser.parse_chapters_and_verses(
+        :verses => ::XmlParser.get_verses(
           'book' => z.book_start, 
           'chapter' => z.chapters, 
           'verse_start' => z.verse_start, 
