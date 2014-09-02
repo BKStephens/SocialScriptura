@@ -9,7 +9,8 @@ class BibleController < ApplicationController
   end
 
   def bible_search_versions_list
-    render json: ::BibleSearch.versions_list, status: 200
+    #render json: ::BibleSearch.versions_list, status: 200
+    render json: ::BibleSearch.get_verses({:bible_version => 'eng-ESV', :book => 'Genesis', :chapter => '1'})
   end  
 
   def show
