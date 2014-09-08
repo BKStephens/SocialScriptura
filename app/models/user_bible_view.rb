@@ -16,7 +16,7 @@ class UserBibleView < ActiveRecord::Base
   def default_values
     bible_book = BibleBooks.where(:book => 'Genesis').select("id, book").first
     bible_chapter = BibleChapters.where(:chapters => '1', :bible_books_id => bible_book).select("id, chapters").first
-    self.bible_version ||= 'asv.xml'
+    self.bible_version ||= BibleVersion.where(name: 'English Standard Version').select("id").first
     self.book ||= bible_book[:book]
     self.chapter ||= bible_chapter[:chapters]
     self.chapter_dropdown_id ||= bible_chapter[:chapters]

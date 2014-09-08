@@ -9,8 +9,7 @@ class BibleController < ApplicationController
   end
 
   def bible_search_versions_list
-    #render json: ::BibleSearch.versions_list, status: 200
-    render json: ::BibleSearch.get_verses({:bible_version => 'eng-ESV', :book => 'Genesis', :chapter => '1'})
+    render json: ::BibleSearch.get_verses_and_copyright({:bible_version => 'eng-ESV', :book => 'Genesis', :chapter => '1', :verse_start => 1, :verse_end => 2})
   end  
 
   def show
@@ -45,7 +44,7 @@ class BibleController < ApplicationController
      @users_bible_view.save
    end
 
-   def bible_content(bible_params) 
+   def bible_content(bible_params)
      ::XmlParser.get_verses(bible_params)
    end
      

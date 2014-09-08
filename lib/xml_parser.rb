@@ -2,9 +2,10 @@ class XmlParser
   require 'open-uri'
   require 'libxml'
 
-  def self.get_verses(bible_hash)  
-    xml = File.read("public/Bibles/#{bible_hash['bible_version']}")
-    
+  def self.get_verses(bible_hash) 
+    bible_file_name = ::BibleVersion.where(abbreviation: bible_hash['bible_version']).first['file_name']
+    xml = File.read("public/Bibles/#{bible_file_name}")
+
     content = LibXML::XML::Parser.string(xml).parse
     chapters = content.root.find('//XMLBIBLE/BIBLEBOOK[@bname="'+bible_hash['book']+'"]/CHAPTER[@cnumber='+bible_hash['chapter'].to_s+']')
     

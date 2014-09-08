@@ -1,8 +1,10 @@
 class BibleSearch
   require 'HTTParty'
 
-  def self.get_verses(bible_hash)
+  def self.get_verses_and_copyright(bible_hash)
     bible_book = BibleBooks.find_by(book: bible_hash[:book])
+    verse_start = bible_hash[:verse_start] || 0
+    verse_end = bible_hash[:verse_end] || 1000
 
     auth = {:username => ENV['BIBLESEARCH_KEY'], :password => ENV['BIBLESEARCH_PASSWORD']}
     response = HTTParty.get("https://bibles.org/v2/chapters/#{bible_hash[:bible_version]}:#{bible_book[:abbreviation]}.#{bible_hash[:chapter]}/verses.js", :basic_auth => auth)
@@ -13,7 +15,9 @@ class BibleSearch
     verses_and_copyright["copyright"] = response_hash["response"]["verses"][1]["copyright"]
 
     response_hash["response"]["verses"].each do |verse|
-      verses_and_copyright["verses"] += verse["text"] + ' '
+      if verse["verse"].to_i.between?(verse_start, verse_end)
+        verses_and_copyright["verses"] += verse["text"] + ' '
+      end
     end
     
     html_to_text(verses_and_copyright["copyright"])
