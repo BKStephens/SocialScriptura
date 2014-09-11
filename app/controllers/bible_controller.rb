@@ -45,7 +45,7 @@ class BibleController < ApplicationController
    end
 
    def bible_content(bible_params)
-     ::XmlParser.get_verses(bible_params)
+     ::BibleSearch.get_verses_and_copyright(bible_params)["verses"]
    end
      
    def comment_section
