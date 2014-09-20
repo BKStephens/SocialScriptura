@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140920164226) do
+ActiveRecord::Schema.define(version: 20140920180651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20140920164226) do
   end
 
   add_index "bible_chapters", ["bible_books_id"], name: "index_bible_chapters_on_bible_books_id", using: :btree
+
+  create_table "bible_search_caches", force: true do |t|
+    t.string   "bible_version"
+    t.string   "bible_book_abbreviation"
+    t.integer  "chapter"
+    t.integer  "verse"
+    t.text     "content"
+    t.string   "copyright"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bible_verses", force: true do |t|
     t.integer  "bible_chapters_id"
