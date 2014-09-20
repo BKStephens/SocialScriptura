@@ -74,7 +74,11 @@ class BibleSearch
    end
 
    def self.html_to_text(html_string)
-     if html_string then html_string.gsub!(%r{</?[^>]+?>}, ' ').to_s end
+     if html_string 
+       html_string.gsub!(%r{</?[^>]+?>}, '').to_s #remove html tags
+       html_string.gsub!(/(?<digit>\d)(?<character>[a-zA-Z"])/,'\k<digit> \k<character>') #add space between digits and characters
+     end
+     
      return html_string
    end
 
