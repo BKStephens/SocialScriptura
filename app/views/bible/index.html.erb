@@ -42,7 +42,8 @@
 	    </div>
 		<div id="expand_comment_options"><i class="fa fa-caret-square-o-down fa-3x"></i></div>
 	    <span class="comment_description"><%= c.text_area :description %></span>
-	    <%= c.hidden_field :user_id, :value => current_user.id %>
+      <%= c.hidden_field :user_id, :value => current_user.id %>
+      <%= c.hidden_field :bible_version, :value => @users_bible_view.bible_version %>
 	    <%= c.submit "Comment", :class => 'button expand', :id => 'red_button' %>
 	  <% end %>
 	</article>

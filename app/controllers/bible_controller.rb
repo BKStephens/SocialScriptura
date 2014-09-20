@@ -9,7 +9,7 @@ class BibleController < ApplicationController
   end
 
   def bible_search_versions_list
-    render json: ::BibleSearch.get_verses_and_copyright({:bible_version => 'eng-ESV', :book => 'Genesis', :chapter => '1', :verse_start => 1, :verse_end => 2})
+    render json: ::BibleSearch.get_verses_and_copyright({book: 'Genesis', chapter: 1, verse_start: 1, verse_end: 3, bible_version: 'ESV'})
   end  
 
   def show

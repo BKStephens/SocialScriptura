@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140901173424) do
+ActiveRecord::Schema.define(version: 20140920164226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140901173424) do
     t.integer  "verse_start"
     t.integer  "chapter_end"
     t.integer  "verse_end"
+    t.string   "bible_version"
   end
 
   create_table "messages", force: true do |t|

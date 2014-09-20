@@ -42,7 +42,7 @@ class Relationship < ActiveRecord::Base
     user_ids << user[:id].to_i
     
     comments = User.all_comments
-    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description')
+    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description, comments.bible_version')
     .joins('INNER JOIN users ON comments.user_id = users.id')
     .joins('INNER JOIN bible_chapters ON comments.chapter_start = bible_chapters.id')
     .where(
@@ -57,14 +57,15 @@ class Relationship < ActiveRecord::Base
     user_ids = user.accepted_friends.pluck('users.id').to_a
     user_ids << user[:id].to_i
     
-    comments = User.all_comments
-    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description')
+     comments = User.all_comments
+    .select('comments.created_at, book_start, bible_chapters.chapters, verse_start, verse_end, user_id, user_name, full_name, comments.description, comments.bible_version')
     .joins('INNER JOIN users ON comments.user_id = users.id')
     .joins('INNER JOIN bible_chapters ON comments.chapter_start = bible_chapters.id')
     .where(
       :user_id => user_ids
     )
     .order('comments.created_at DESC').to_a
+
   end
 
   private

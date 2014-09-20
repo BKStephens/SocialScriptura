@@ -9,6 +9,10 @@ $(document).ready ->
   $('#user_bible_view_bible_version').change ->
     $('article#Bible').find('form').submit();
 
+  $('#user_bible_view_bible_version').change ->
+    bible_version = $('#user_bible_view_bible_version :selected').val()
+    $('#comment_bible_version').val(bible_version)    
+
   $('#user_bible_view_book').change ->
     #Filter the Bible Chapters
     book = $('#user_bible_view_book :selected').text()

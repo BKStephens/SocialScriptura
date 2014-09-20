@@ -67,6 +67,6 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.require(:comment).permit(:book_start,:chapter_start,:verse_start,:chapter_end,:verse_end,:description,:date_time_stamp,:user_id)
+      params.require(:comment).permit(:book_start,:chapter_start,:verse_start,:chapter_end,:verse_end,:description,:date_time_stamp,:user_id,:bible_version)
     end
 end

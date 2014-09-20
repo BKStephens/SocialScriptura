@@ -40,9 +40,11 @@ class User < ActiveRecord::Base
   end
 
   def add_bible_verses_to_comments(comments_data)
+    comments_with_bible_verses = Array.new
 
-    single_comment_json = comments_data.map do |z|
-      { :book_start => z.book_start,
+    single_comment_json = comments_data.each do |z|
+      verses_and_copyright = ::BibleSearch.get_verses_and_copyright({book: z.book_start, chapter: z.chapters, verse_start: z.verse_start, verse_end: z.verse_end, bible_version: z.bible_version })
+      single_comment = { :book_start => z.book_start,
         :chapters => z.chapters,
         :verse_start => z.verse_start,
         :verse_end => z.verse_end,
@@ -51,17 +53,14 @@ class User < ActiveRecord::Base
         :full_name => z.full_name,
         :description => z.description,
         :created_at => z.created_at.strftime("%m-%d-%Y at %H:%M:%S %p"),
-        :verses => ::XmlParser.get_verses(
-          'book' => z.book_start, 
-          'chapter' => z.chapters, 
-          'verse_start' => z.verse_start, 
-          'verse_end' => z.verse_end, 
-          'bible_version' => 'asv.xml' 
-        )
+        :verses => verses_and_copyright["verses"],
+        :copyright => verses_and_copyright["copyright"] 
       }
+      
+      comments_with_bible_verses << single_comment
     end
-    
-    comments_json = { :comments => single_comment_json }
+        
+    comments_json = { :comments => comments_with_bible_verses }
   end
 
   def self.comments
