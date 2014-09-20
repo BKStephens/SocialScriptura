@@ -43,7 +43,16 @@ class User < ActiveRecord::Base
     comments_with_bible_verses = Array.new
 
     single_comment_json = comments_data.each do |z|
-      verses_and_copyright = ::BibleSearch.get_verses_and_copyright({book: z.book_start, chapter: z.chapters, verse_start: z.verse_start, verse_end: z.verse_end, bible_version: z.bible_version })
+      verses_and_copyright = ::BibleSearch.get_verses_and_copyright(
+        { 
+          book: z.book_start, 
+          chapter: z.chapters, 
+          verse_start: z.verse_start, 
+          verse_end: z.verse_end, 
+          bible_version: z.bible_version 
+        }
+      )
+      
       single_comment = { :book_start => z.book_start,
         :chapters => z.chapters,
         :verse_start => z.verse_start,
@@ -52,7 +61,7 @@ class User < ActiveRecord::Base
         :user_name => z.user_name,
         :full_name => z.full_name,
         :description => z.description,
-        :created_at => z.created_at.strftime("%m-%d-%Y at %H:%M:%S %p"),
+        :created_at => z.created_at.strftime("%m-%d-%Y at %l:%M:%S %p"),
         :verses => verses_and_copyright["verses"],
         :copyright => verses_and_copyright["copyright"] 
       }
