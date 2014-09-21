@@ -72,7 +72,7 @@ $(document).ready ->
         $("#BibleOutput").empty();
         $("#BibleOutput").text(json.bible_content);
         $("#ContentStream").append(mustacheContentStreamBuilder(json.content_stream));
-    
+        $("#fums").append(json.fums);
       error: ->
         console.log('Error with submit bible form javascript')
 

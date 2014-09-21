@@ -4,7 +4,8 @@ class BibleController < ApplicationController
 
   def index
     @users_bible_view = set_users_bible_view
-    @output = bible_content(@users_bible_view)
+    bible_content = bible_content(@users_bible_view)
+    @output = bible_content["verses"]
     comment_section
   end
 
@@ -20,16 +21,19 @@ class BibleController < ApplicationController
     @users_bible_view = set_users_bible_view
     @users_bible_view.set_attributes(comment_params)
     @users_bible_view.save
-    
-    @output = bible_content(@users_bible_view)
+   
+    bible_content = bible_content(@users_bible_view)
+    @output = bible_content["verses"]
+    @fums = bible_content["fums"]    
     content_stream
-    
     respond_to do |format|
         format.html { render :json => { :bible_content => @output,
-                                        :content_stream => @content_stream }}
+                                        :content_stream => @content_stream,
+                                        :fums => @fums  }}
         format.js
         format.json { render :json => { :bible_content => @output,
-                                :content_stream => @content_stream }}
+                                :content_stream => @content_stream,
+                                :fums => @fums }}
     end
   end
 
@@ -45,7 +49,7 @@ class BibleController < ApplicationController
    end
 
    def bible_content(bible_params)
-     ::BibleSearch.get_verses_and_copyright(bible_params)["verses"]
+     verses_and_copyright = ::BibleSearch.get_verses_and_copyright(bible_params)
    end
      
    def comment_section

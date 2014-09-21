@@ -15,6 +15,7 @@ class BibleSearch
     else
       get_verses_from_api(bible_hash, bible_book, verse_start, verse_end)
     end
+    
   end
 
   private
@@ -43,7 +44,8 @@ class BibleSearch
      verses_and_copyright = Hash.new('')
 
      verses_and_copyright["copyright"] = response_hash["response"]["verses"][1]["copyright"] ? sanitize_string(response_hash["response"]["verses"][1]["copyright"]) : ''
-
+     verses_and_copyright["fums"] = response_hash["response"]["meta"]["fums_noscript"]
+     
      response_hash["response"]["verses"].each do |verse|
        if verse["verse"].to_i.between?(verse_start, verse_end)
          verses_and_copyright["verses"] += sanitize_string(verse["text"]) + ' '
