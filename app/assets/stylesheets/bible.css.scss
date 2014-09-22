@@ -36,6 +36,23 @@ div .comment_chapter_verse {
   float:right;
 }
 
+div .comment_body {
+  padding-bottom: 4px;
+}
+
+div .comment_copyright {
+  padding: 8px 0; 
+  font-size: 8px;
+  line-height: 100%;
+  text-align: right;
+}
+
+#BibleCopyright {
+  padding: 8px 0; 
+  font-size: 8px;
+  line-height: 100%;
+  text-align: right;
+}
 .comment_description textarea {
   height: 10rem;
   float:left;
@@ -74,3 +91,5 @@ div .comment_chapter_verse {
 #Content, #ContentStream {
   float: right;
 }
+
+

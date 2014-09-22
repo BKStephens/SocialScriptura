@@ -1,6 +1,7 @@
 class BibleSearch
   require 'HTTParty'
-  
+  require 'cgi'
+
   def self.get_verses_and_copyright(bible_hash)
     bible_book = BibleBooks.find_by(book: bible_hash[:book])
     verse_start = bible_hash[:verse_start] || 0
@@ -43,7 +44,7 @@ class BibleSearch
     
      verses_and_copyright = Hash.new('')
 
-     verses_and_copyright["copyright"] = response_hash["response"]["verses"][1]["copyright"] ? sanitize_string(response_hash["response"]["verses"][1]["copyright"]) : ''
+     verses_and_copyright["copyright"] = response_hash["response"]["verses"][1]["copyright"] ? sanitize_string(response_hash["response"]["verses"][1]["copyright"]) : bible_hash[:bible_version] 
      verses_and_copyright["fums"] = response_hash["response"]["meta"]["fums_noscript"]
      
      response_hash["response"]["verses"].each do |verse|
@@ -64,10 +65,10 @@ class BibleSearch
    end
 
    def self.sanitize_string(str)
-     remove_h3_content(str)
-     remove_newline(str)
-     html_to_text(str) 
-     remove_whitespace(str)
+     str = remove_h3_content(str)
+     str = remove_newline(str)
+     str = html_to_text(str) 
+     str = remove_whitespace(str)
    end
 
    def self.remove_h3_content(html_string)
@@ -77,8 +78,12 @@ class BibleSearch
 
    def self.html_to_text(html_string)
      if html_string 
-       html_string.gsub!(%r{</?[^>]+?>}, '').to_s #remove html tags
-       html_string.gsub!(/(?<digit>\d)(?<character>[a-zA-Z"])/,'\k<digit> \k<character>') #add space between digits and characters
+       html_string.gsub!(%r{</?[^>]+?>}, ' ').to_s #remove html tags
+       html_string = CGI.unescapeHTML(html_string)
+       html_string.gsub!('G OD', 'GOD').to_s
+       html_string.gsub!('L ORD', 'LORD').to_s
+       #html_string.gsub!(/(?<digit>\d)(?<character>[a-zA-Z"])/,'\k<digit> \k<character>') #add space between digits and characters
+       html_string.gsub!(/(?<comma>[,])(?<character>[a-zA-Z0-9])/,'\k<comma> \k<character>')
      end
      
      return html_string

@@ -6,6 +6,7 @@ class BibleController < ApplicationController
     @users_bible_view = set_users_bible_view
     bible_content = bible_content(@users_bible_view)
     @output = bible_content["verses"]
+    @copyright = bible_content["copyright"]
     comment_section
   end
 
@@ -24,16 +25,19 @@ class BibleController < ApplicationController
    
     bible_content = bible_content(@users_bible_view)
     @output = bible_content["verses"]
+    @copyright = bible_content["copyright"]
     @fums = bible_content["fums"]    
     content_stream
     respond_to do |format|
         format.html { render :json => { :bible_content => @output,
                                         :content_stream => @content_stream,
+                                        :copyright => @copyright,
                                         :fums => @fums  }}
         format.js
         format.json { render :json => { :bible_content => @output,
-                                :content_stream => @content_stream,
-                                :fums => @fums }}
+                                        :content_stream => @content_stream,
+                                        :copyright => @copyright,
+                                        :fums => @fums }}
     end
   end
 
