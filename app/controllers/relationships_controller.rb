@@ -4,7 +4,6 @@ class RelationshipsController < ApplicationController
 
   def index
     @user = current_user
-    #content_stream
   end
 
   def show
@@ -15,10 +14,8 @@ class RelationshipsController < ApplicationController
     @relationship = Relationship.new
   end
 
-
   def content_stream
     @most_recent_content_stream = current_user.most_recent_content_stream.to_json
-
     respond_to do |format|
       format.html { render :json => { :content_stream => @most_recent_content_stream }}
       format.js
