@@ -1,8 +1,4 @@
 class BibleSearch
-  require 'rubygems'
-  require 'HTTParty'
-  require 'cgi'
-
   def self.get_verses_and_copyright(bible_hash)
     bible_book = BibleBooks.find_by(book: bible_hash[:book])
     verse_start = bible_hash[:verse_start] || 0
