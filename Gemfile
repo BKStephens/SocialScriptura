@@ -67,4 +67,4 @@ end
  end
 
  gem 'jquery-migrate-rails'
- gem 'httparty'
+ gem 'httparty', '~> 0.13.1' 

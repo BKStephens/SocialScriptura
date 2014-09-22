@@ -1,4 +1,5 @@
 class BibleSearch
+  require 'rubygems'
   require 'HTTParty'
   require 'cgi'
 
