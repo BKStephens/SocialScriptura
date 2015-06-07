@@ -1,5 +1,5 @@
 class AddBibleVersions < ActiveRecord::Migration
-  def up
+  def self.up
     BibleVersion.create!({:name => 'Amplified Bible', :abbreviation => 'AMP'})
     BibleVersion.create!({:name => 'Contemporary English Version', :abbreviation => 'CEVD'})
     BibleVersion.create!({:name => 'English Standard Version', :abbreviation => 'ESV'})
@@ -9,7 +9,7 @@ class AddBibleVersions < ActiveRecord::Migration
     BibleVersion.create!({:name => 'New American Standard Bible', :abbreviation => 'NASB'})
   end
 
-  def down
+  def self.down
     BibleVersion.find_by(name: 'Amplified Bible').delete
     BibleVersion.find_by(name: 'Contemporary English Version').delete
     BibleVersion.find_by(name: 'English Standard Version').delete

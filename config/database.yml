@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: SocialScriptura_development
   pool: 5
-  username: bstephens
+  username: benstephens
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: SocialScriptura_test
   pool: 5
-  username: bstephens
+  username: benstephens
   password:
 
 #Not used on local system so commented out. See Railscasts #342.

@@ -32,21 +32,8 @@ gem 'turbolinks', '~> 2.2.1'
 gem 'jbuilder', '~> 1.2'
 
 group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 
 gem 'devise', '~> 3.2.3'
 gem 'omniauth-twitter'
@@ -61,9 +48,10 @@ gem 'font-awesome-rails'
 
 group :test, :development do
   gem "factory_girl_rails"
+  gem 'pry'
 end
  group :production, :staging do
-      gem 'rails_12factor'
+  gem 'rails_12factor'
  end
 
  gem 'jquery-migrate-rails'
